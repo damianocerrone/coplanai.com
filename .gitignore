@@ -1,1 +1,8 @@
+# product-only repo: pages + assets. Everything that is source, cache or
+# private stays local — same convention as spinunit.org.
+#
+# build.py is deliberately NOT published: it carries the local Dropbox paths
+# and the internal gate logic, neither of which belongs in a public repo.
 .DS_Store
+build.py
+build-report.txt
