@@ -6,3 +6,4 @@
 .DS_Store
 build.py
 build-report.txt
+case-map.json
