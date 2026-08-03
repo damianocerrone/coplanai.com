@@ -1811,13 +1811,19 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
   var P='_static/hero/';
   var pairs=[
     {b:P+'lulea-a-before.webp', a:P+'lulea-a-after-summer.webp',
-     cap:'\u270E Lule\u00E5 workshop \u00B7 Jan 2026',
+     duo:'Lule\u00E5 \u00B7 Sweden \u00B7 Jan 2026',
      q:'More green and places to sit \u2014 answered with planters, benches and golden light.'},
+    {b:P+'norway-a-before.webp', a:P+'norway-a-after.webp',
+     duo:'Gjerdrum \u00B7 Norway \u00B7 2026',
+     q:'The plan\u2019s massing, annotated by participants \u2014 returned as 43 timber homes with gardens and green roofs.'},
     {b:P+'lulea-a-before.webp', a:P+'lulea-a-after-winter.webp',
-     cap:'\u270E Lule\u00E5 workshop \u00B7 Jan 2026',
+     duo:'Lule\u00E5 \u00B7 Sweden \u00B7 Jan 2026',
      q:'The same ask kept in winter light \u2014 patterned paving and string lights overhead.'},
+    {b:P+'norway-b-before.webp', a:P+'norway-b-after.webp',
+     duo:'Gjerdrum \u00B7 Norway \u00B7 2026',
+     q:'Along the new street: the pond kept, as drawn \u2014 boardwalk, gardens and a green bike lane.'},
     {b:P+'lulea-b-before.webp', a:P+'lulea-b-after.webp',
-     cap:'\u270E Lule\u00E5 workshop \u00B7 Jan 2026',
+     duo:'Lule\u00E5 \u00B7 Sweden \u00B7 Jan 2026',
      q:'Heritage lanterns and a protected bike path where the cars used to park.'}
   ];
   pairs.forEach(function(p){ new Image().src=p.b; new Image().src=p.a; });
@@ -1839,7 +1845,8 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
     scene.classList.add('fade');
     setTimeout(function(){
       imgB.src=p.b; imgA.src=p.a;
-      if(cap) cap.innerHTML=p.cap;
+      if(cap&&p.cap) cap.innerHTML=p.cap;
+      if(duo&&p.duo) duo.textContent=p.duo;
       if(quote){ quote.textContent=p.q; }
       scene.classList.remove('fade');
     },480);
