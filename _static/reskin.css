@@ -1,0 +1,113 @@
+/* ============================================================================
+   CoPlanAI — skin refinement v2 ("what we had, refined") + no dark bands
+   ----------------------------------------------------------------------------
+   Damiano's call 2026-08-03: keep the original fonts and colours (Radio Canada
+   + coral/light-blue civic palette) — refine, don't replace — and remove the
+   site's dark mode, i.e. the three page-width DARK BANDS (footer, the big
+   quote panel, the funded-programmes band). Loaded last on every page; nothing
+   structural. Remove the <link> and the site reverts exactly.
+   ========================================================================== */
+
+/* ── 1. Tokens: original values, three surgical nudges ─────────────────────
+   The palette is untouched except where a colour is used as SMALL TEXT and
+   sat just under WCAG AA. Same hues, a step deeper — reads identical at a
+   glance, measurably crisper on the page. */
+:root{
+  /* terra-deep carries eyebrows/labels: #CB4028 → a touch deeper for 4.5:1 */
+  --terra-deep:#BC3A22;
+  /* faint carries captions/section indices: #4F6B79 sat at ~4.4 on the tinted
+     band; one step darker clears it everywhere */
+  --faint:#47616E;
+  /* slightly softer, lower shadows — less "floating", more settled */
+  --shadow:0 1px 2px rgba(20,60,90,.05), 0 12px 32px -18px rgba(20,60,90,.25);
+  --shadow-soft:0 1px 2px rgba(20,60,90,.04), 0 18px 48px -30px rgba(20,60,90,.28);
+}
+
+/* ── 2. Remove the dark bands ──────────────────────────────────────────────
+   The footer, the pull-quote panel and the EU-programmes band all rendered as
+   near-black slabs (background:var(--ink) / #0f2a34). Rebuilt light, using
+   only palette tokens, with hairlines for separation instead of darkness. */
+
+/* footer: ink slab → soft tinted band with hairline top rule */
+.foot{
+  background:var(--canvas2) !important;
+  color:var(--ink) !important;
+  border-top:1px solid var(--line);
+}
+.foot .word, .foot a{ color:var(--ink) !important; }
+.foot h5{ color:var(--ink2) !important; }
+.foot ul a{ color:var(--muted) !important; }
+.foot ul a:hover{ color:var(--ink) !important; }
+.foot .credit{ color:var(--muted) !important; }
+.foot .base{ color:var(--faint) !important; }
+.foot-grid{ border-bottom-color:var(--line) !important; }
+
+/* the big serif quote: dark slab → tinted band, coral highlight kept */
+.mquote{ background:var(--canvas2) !important; color:var(--ink) !important; }
+.mquote .q .hl{ color:var(--terra-deep) !important; }
+
+/* funded-programmes band: dark teal + lime → light band, deep-blue accents.
+   The lime accent (#D6F24E) is unreadable on light, so links/badges move to
+   the palette's own deep blue-green. */
+.fundband{
+  background:var(--paper2) !important;
+  --faint:#47616E;
+  border-top:1px solid var(--line2);
+  border-bottom:1px solid var(--line2);
+}
+.fundband .eyebrow, .fundband .eyebrow.green{ color:var(--green-deep) !important; }
+.fundband h2, .fundband .tc-h, .fundband .tc-name, .fundband .tc-specs .v{ color:var(--ink) !important; }
+.fundband .sec-head p, .fundband .tc-b, .fundband .tc-full{ color:var(--muted) !important; }
+.fundband .tc-specs .k{ color:var(--faint) !important; }
+.fundband a{ color:var(--green-deep) !important; }
+.fundband .tcard{
+  background:var(--paper) !important;
+  border-color:var(--line) !important;
+  box-shadow:var(--shadow-soft);
+}
+.fundband .tc-h{ background:rgba(20,37,48,.03) !important; border-bottom-color:var(--line2) !important; }
+.fundband .tc-badge{ background:var(--green-soft) !important; color:var(--green-deep) !important; }
+
+/* ── 3. Small-text accents that sat under AA, same hue family ──────────────
+   The uppercase eyebrow labels are set in bright coral (--terra) at ~3.0:1 —
+   the single most-repeated small text on the site. Deep coral reads the same
+   at a glance and clears AA. (Per-card accent labels driven by --lc/--qc are
+   left as designed: they're the multi-colour card system, and each is tiny
+   and decorative.) */
+.eyebrow{ color:var(--terra-deep); }
+.eyebrow.green{ color:var(--green-deep); }
+
+/* ── 4. Quiet polish ───────────────────────────────────────────────────────
+   Finish details only — no layout, no type-family changes. */
+::selection{ background:var(--terra-soft); color:var(--ink); }
+:focus-visible{ outline:2px solid var(--terra); outline-offset:2px; }
+a{ text-underline-offset:2px; }
+hr{ border:0; border-top:1px solid var(--line); }
+
+/* ── 5. Chapter marks ──────────────────────────────────────────────────────
+   The section eyebrows already carry a number (<span class="no">02</span>).
+   Promote them to a dossier rhythm: mono coral numeral, small-caps label, and
+   a hairline rule running to the right margin. Scoped to .sec-head so the
+   footer/band eyebrows stay as they are. */
+.sec-head .eyebrow{ display:flex; align-items:center; gap:12px; width:100%; }
+.sec-head .eyebrow .no{
+  font-family:var(--mono); font-weight:600; letter-spacing:.05em;
+  color:var(--terra-deep);
+}
+.sec-head .eyebrow::after{ content:""; flex:1; height:1px; background:var(--line); }
+
+/* ── 6. Two-tier buttons ───────────────────────────────────────────────────
+   Ink for actions, coral reserved for meaning (highlights, category accents,
+   the "imagine." moment). Primary buttons move from coral to ink; the nav CTA
+   becomes the one solid pill in the header. Coral text-links stay coral. */
+.btn-primary{
+  background:var(--ink) !important;
+  box-shadow:0 10px 22px -14px rgba(20,37,48,.5) !important;
+}
+.btn-primary:hover{ background:var(--ink2) !important; }
+.nav .btn-nav{ background:var(--ink); border-color:var(--ink); color:var(--canvas); }
+.nav .btn-nav:hover{ background:var(--ink2); border-color:var(--ink2); color:var(--paper); }
+
+/* (category top-rules tried 2026-08-03, rejected by Damiano — the coloured
+   line fought the rounded corners. Category colour lives in the stickers
+   only. Do not reintroduce coloured edge rules anywhere on the site.) */

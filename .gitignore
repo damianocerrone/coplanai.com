@@ -7,3 +7,7 @@
 build.py
 build-report.txt
 case-map.json
+# local skin-variant previews (never published; pick one, then delete)
+variant-*.html
+_static/reskin-b.css
+_static/reskin-c.css
