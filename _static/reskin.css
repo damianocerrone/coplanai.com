@@ -238,11 +238,17 @@ body::before{
        `position:fixed` at left:22 while the column keeps moving left. There
        is no width below 1600px where a label fits beside the column, so the
        labels come off entirely; position is still legible from the active
-       dot, which is coral and scaled 1.6x. */
-@media(max-width:1599px){
-  .msn-rail .rl,
-  .msn-rail a.on .rl{ display:none; }
-}
+       dot, which is coral and scaled 1.6x.
+
+   SUPERSEDED 2026-08-04. The overlap diagnosis above is correct, but hiding the
+   labels removed the thing the chapter rail is for — Damiano: "I saw the side
+   bar with the chapter names and it was perfect... now I do not see the chapter
+   headers anymore". The labels only collided because the rail is
+   `position:fixed` in the viewport while the deck column is centred in it, so
+   the two share the same space. The fix is to give the rail its own GUTTER
+   (see `.entry-content > section.msn-ch{padding-left}` in the mission
+   generator) rather than to delete the labels. This block is intentionally
+   left empty so the generator's rail rules apply. */
 
 /*  (b) On mobile the stacked figures put their caption ON the figure.
     `.mst-cap` is `position:absolute; bottom:14px; z-index:3` with a 92%-white

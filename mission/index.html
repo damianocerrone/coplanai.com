@@ -1425,12 +1425,23 @@ html{scroll-snap-type:none}
 .msn-rail .rd{width:7px;height:7px;border-radius:50%;background:rgba(20,37,48,.25);flex:none;
   transition:background .2s,transform .2s}
 .msn-rail .rl{font-family:var(--mono);font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;
-  color:var(--muted);white-space:nowrap;transition:color .2s,font-size .2s}
+  color:var(--muted);white-space:nowrap;transition:color .2s,font-size .2s;
+  max-width:150px;overflow:hidden;text-overflow:ellipsis}
 .msn-rail a:hover .rl{color:var(--ink)}
 .msn-rail a.on .rd{background:var(--terra);transform:scale(1.6)}
 .msn-rail a.on .rl{color:var(--terra-deep);font-size:.86rem;font-weight:600}
 .msn-inline{display:none}
-@media(max-width:1439px){.msn-rail .rl{display:none}.msn-rail a.on .rl{display:inline;font-size:.74rem}}
+/* The rail is position:fixed in the viewport while the deck column is centred
+   in it, so with nothing reserved the labels print on top of the prose on any
+   window under ~1700px (measured: 76-86px of overlap at 1440px). Give the rail
+   its OWN GUTTER instead of hiding the labels — the chapter names are the point
+   of the rail. The deck sections carry the gutter, so chapter titles, the
+   scrollytelling grid and the bridges all clear it together. */
+@media(min-width:1024px){
+  .entry-content > section.msn-ch{ padding-left:var(--rail-gutter,208px); }
+  .msn-rail .rl, .msn-rail a.on .rl{ display:inline; }
+}
+@media(min-width:1024px) and (max-width:1279px){ :root{ --rail-gutter:184px; } }
 @media(max-width:940px){
   .msn-rail{display:none}
   .msn-sc{grid-template-columns:1fr;gap:0}
