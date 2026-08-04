@@ -77,6 +77,17 @@
 .eyebrow{ color:var(--terra-deep); }
 .eyebrow.green{ color:var(--green-deep); }
 
+/* ── 3b. Reveal failsafe ───────────────────────────────────────────────────
+   `.rise` starts at opacity:0 and is only revealed when an IntersectionObserver
+   callback adds `.in`. That makes ALL page content dependent on JavaScript
+   running: if the observer never fires, the page renders blank. There is a
+   <noscript> guard, but it does not cover the more likely case — script present
+   but erroring before `rio.observe()`. Reveal unconditionally when scripting is
+   unavailable, so content is never hostage to a JS failure. */
+@media (scripting: none){
+  .rise{ opacity:1 !important; transform:none !important; }
+}
+
 /* ── 4. Quiet polish ───────────────────────────────────────────────────────
    Finish details only — no layout, no type-family changes. */
 ::selection{ background:var(--terra-soft); color:var(--ink); }
