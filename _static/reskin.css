@@ -767,3 +767,76 @@ a.ab-maplink{ font-size:11.5px; }
   .word .logo{ height:24px; }
   .foot .word .logo{ height:26px; }
 }
+
+
+/* ── 10. The canvas is grey, and it is not supposed to be ──────────────────
+   Damiano, 2026-08-05: "I really do not like that grey colour as background,
+   just use a shade of white instead."
+
+   `--canvas` is #F3F9FD — a blue-cast white. The page rendered rgb(213,219,225),
+   a flat grey, on every page since the mirror. Measured each layer in isolation
+   (`_preview-grain.html`, headless Chrome, average of a 200x80 patch):
+
+       #F3F9FD alone ............. (243, 249, 253)   the design
+       + body speckle ............ (217, 222, 228)   ← the grey
+       + body::before veil ....... (241, 247, 251)   −2, genuinely subtle
+       both, i.e. what shipped ... (215, 220, 226)   matches the live page
+
+   So it is the `body` speckle, not the 5% multiply veil. That texture builds
+   its mask with
+
+       feColorMatrix values='… 0.09 0.09 0.09 0 0'   (the alpha row)
+
+   which SUMS the turbulence's R, G and B — so the mask averages ~3x the 0.09
+   it reads as, and the #2b3640 flood lands as a ~10% dark wash rather than
+   sparse speckle. §7.1 above repaired that texture's broken `url(#n)` filter
+   reference — it was right to, that was the black-page bug — but a working
+   texture with the wrong alpha is still a grey veil over the whole site.
+
+   Dropped rather than re-tuned: the ::before veil already carries the paper
+   grain at a cost of two points of lightness, and the canvas is now the
+   #F3F9FD it was designed as. To bring the speckle back, delete this rule and
+   change the three 0.09s in §7.1 to 0.03. */
+body{ background-image:none; }
+
+/* Same complaint, second cause: with the veil gone the 24 designed pages sit on
+   --canvas #F3F9FD but the 131 stock pages sit on the block theme's own
+   #EEF1F6 — a greyer white, and a visible step when you follow a link from
+   /use-cases/ into a post. The de-WordPressing of 2026-08-04 unified the
+   chrome; this unifies the paper under it. */
+body{ background-color:var(--canvas); }
+
+
+/* ── 11. /use-cases/: four cases per row ───────────────────────────────────
+   Damiano, 2026-08-05: "extend the use case pages to the full width so you can
+   fit 4 cases per row instead of 3." He chose the wide-grid reading: the case
+   grid breaks out to its own column, the chrome and the reading column stay on
+   the 1110px the header and footer are aligned to.
+
+   Two constraints have to give at once, or nothing moves:
+     · the theme's `.entry-content > section` clamps the content box to 1110px
+       via padding-inline — restated here at 1420px for this one section, with
+       a 24px floor so the cards never touch the viewport edge on a 1440
+       screen (where the formula alone would leave 10px);
+     · `.wrap` is capped at `--maxw`, i.e. 1180px — so widening the section
+       alone would have moved nothing.
+
+   Card width, measured: 3-up on the old 1110 column = 336.7px. 4-up on 1420 =
+   324.5px, and 317px at a 1440 viewport. Within 6% of the size the cards have
+   always been, which is why the breakout is only 1420 and not wider.
+
+   Only /use-cases/ carries `.uc-grid` markup (verified 2026-08-05), so the
+   column rules are scoped to the section and the grid rules are safe as-is. */
+section.uc-wide{ padding-inline:max(24px, calc((100% - 1420px) / 2)); }
+section.uc-wide > .wrap{ max-width:1420px; }
+
+/* The 4-up ladder. Below 1280 a fourth column costs more than it gives — the
+   cards fall to 257px and the two-word titles start breaking to three lines —
+   so it steps back to the 3-up the page already had. The 860 and 640 steps
+   below that are the page's own and are left alone.
+   `.uc-grid.list` (the list-view toggle) is (0,2,0) and out-specifies every
+   rule here, so the list view keeps its single column at every width. */
+.uc-grid{ grid-template-columns:repeat(4,1fr); }
+@media(max-width:1280px){ .uc-grid{ grid-template-columns:repeat(3,1fr); } }
+@media(max-width:860px){  .uc-grid{ grid-template-columns:repeat(2,1fr); } }
+@media(max-width:640px){  .uc-grid{ grid-template-columns:1fr; } }
