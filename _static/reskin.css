@@ -669,3 +669,101 @@ a.ab-maplink{ font-size:11.5px; }
    `position:absolute`, so the larger pill cannot move the table. */
 #governance{ --ac-ink:var(--gold-deep); }
 .pr-plan .pr-badge{ background:var(--terra-deep) !important; font-size:11.5px; }
+
+
+/* ── 9. The header, rebuilt as the footer's counterpart ────────────────────
+   Damiano, 2026-08-04: "redesign the header so it is complementary to the
+   footer — the current header is not full width as the footer."
+
+   Measured before (1280px viewport, index.html):
+       .nav   x=78  w=1110   ← an island slab, 32px below the top edge
+       .foot  x=0   w=1265   ← full-bleed band, inner column 1110 at x=78
+   Both content columns already landed on the same 1110px, so the only thing
+   that broke the pairing was the BAND: the footer's tint runs edge to edge,
+   the header's stopped at the column. Two bars, two different ideas.
+
+   What makes them a pair now:
+     · the same full-bleed geometry — the header takes the identical
+       `padding-inline:max(0px,calc((100% - 1110px)/2))` the designed pages
+       already give `.entry-content > section, > footer`, so the band spans the
+       viewport and the inner column stays exactly 1110px;
+     · the same tint — --canvas2, the footer's band colour, carried at .86
+       alpha so the sticky blur still reads through it;
+     · the same hairline — 1px var(--line), the footer's top rule mirrored as
+       the header's bottom rule (it was the lighter --line2);
+     · the same mark — the CoPlanAI logo now opens the header and the footer;
+     · the same gutters at every width, including the 18px mobile gutter the
+       footer already used and the header did not.
+
+   Placement is stated for BOTH paths this chrome takes:
+     · designed pages — `.nav` is a child of the theme's constrained content
+       column (`.is-layout-constrained > *`, max-width 1110 + auto margins);
+     · stock pages — site-chrome.css §placement gives it max-width:1110 and
+       margin-top:32px explicitly.
+   `.nav.nav` (0,2,0) beats the first and, loading later, beats the second. */
+.nav.nav{
+  max-width:none;
+  margin-top:0; margin-inline:0;
+  padding-inline:max(0px, calc((100% - 1110px) / 2));
+  background:rgba(228,241,249,.86);        /* = --canvas2, the footer's band */
+  border-bottom:1px solid var(--line);
+}
+/* Without backdrop-filter the .86 alpha would let the page show through the
+   band as it scrolls under. Fall back to the flat footer tint. */
+@supports not ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){
+  .nav.nav{ background:var(--canvas2); }
+}
+/* 18px of extra bar height so a full-bleed band carries the weight the 1110px
+   slab did not need. The inner column keeps max-width:1180 inside a 1110px
+   content box — the same arithmetic as `.foot .wrap`, i.e. 1054px of content
+   in both, so the logo sits exactly above the footer's logo. */
+.nav .nav-in{ padding:18px 28px; }
+
+/* The same geometry stated for the footer, because two designed pages never
+   got it: /404.html and /knowledge/ were both hand-built after the mirror and
+   carry no `.entry-content > section, > footer{max-width:none; padding-inline:…}`
+   rule, so their footers render as 1110px slabs while the other 153 pages
+   run edge to edge. Identical values to the rule the other pages declare
+   inline and to site-chrome.css §placement, so this is a no-op everywhere
+   except those two. */
+.foot{
+  max-width:none;
+  padding-inline:max(0px, calc((100% - 1110px) / 2));
+}
+
+/* ── 9.1 The logo ──────────────────────────────────────────────────────────
+   `.word` was a coral dot plus the text "CoPlanAI" set in Radio Canada Big.
+   It is now the real lockup (CoPlan + the AI speech bubble), traced from
+   CoPlan-logo-black.png to a 3.9KB SVG so it stays crisp at any DPR — brand
+   colours untouched (#0B1B3F wordmark, #2D6CFF bubble). Header and footer
+   carry the same file. */
+.word .logo{
+  display:block; width:auto; height:28px;
+  /* Something in the theme gives images `margin-inline:auto`. In the header it
+     is inert — `.word` is a flex item sized to its content, so there is no free
+     space to distribute — but the footer's `.word` spans its whole grid column,
+     and the mark centred itself there (measured x=144 in a 18→372 column at
+     390px). Both marks must sit on the same left edge as the text under them. */
+  margin-inline:0;
+  /* the SVG has no padding of its own; the optical baseline of the wordmark
+     sits ~1px low against the nav links */
+  position:relative; top:-1px;
+}
+.foot .word .logo{ height:30px; top:0; }
+/* `.word` still declares font-size/letter-spacing for the text it no longer
+   holds; gap would add 8px of dead space beside a single child. */
+.word{ gap:0; }
+
+/* ── 9.2 Widths ────────────────────────────────────────────────────────────
+   ≤940 the padding-inline formula already collapses to 0 and the nav becomes
+   the mobile dropdown; only the bar height and the mobile gutter need saying.
+   18px matches `.foot .wrap` so the two bars share one edge on phones too. */
+@media(max-width:940px){
+  .nav .nav-in{ padding:14px 28px; }
+  .word .logo{ height:26px; }
+}
+@media(max-width:640px){
+  .nav .nav-in{ padding:12px 18px; }
+  .word .logo{ height:24px; }
+  .foot .word .logo{ height:26px; }
+}

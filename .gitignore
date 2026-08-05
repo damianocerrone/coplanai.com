@@ -40,3 +40,11 @@ variant-*.html
 _static/reskin-b.css
 _static/reskin-c.css
 _preview-*.html
+
+# --- Claude Code scaffolding ------------------------------------------------
+# Background tasks run in git worktrees under .claude/worktrees/. deploy.py does
+# `git stash --include-untracked` and then `git add -A`, so leaving this
+# untracked would (a) risk stashing another session's live worktree out from
+# under it and (b) commit nested checkouts into a repo that is served as a
+# website. Ignored, never published.
+.claude/
