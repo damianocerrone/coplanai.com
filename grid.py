@@ -25,7 +25,7 @@ which is the exact bug the 2026-08-04 audit had repaired by hand. A generator
 whose output shape disagrees with the page's shape is a loaded gun; the fix is to
 let it own the whole shape.
 
-TWO THINGS KEEP THIS SAFE:
+THREE THINGS KEEP THIS SAFE:
 
 1. **It owns only what is between the markers.** `index.html` is hand-written
    marketing; a generator has no business rewriting it. The block is marked with
@@ -35,6 +35,16 @@ TWO THINGS KEEP THIS SAFE:
 2. **A card is only emitted for an entry that has BOTH a task and a page.**
    No task means it cannot be placed in a panel; no page means the card would
    link nowhere. Neither is guessed, and both shortfalls are reported.
+
+3. **A cloned card's blurb only ever quotes the target PAGE, never the ledger.**
+   `record.brief` is internal editorial prose — contract values, cost centres,
+   admin-filename citations — and it leaked straight onto the live homepage
+   until 2026-08-26 (the GIZ card read "EUR 14,850 lump sum, cost centre
+   G-018124…" to every visitor). `public_blurb_for()` reads only what the case
+   page already shows in public; a thin stub with nothing written yet gets NO
+   blurb rather than an invented or borrowed one — see its docstring for the
+   companion bug this also closed (a stale sample's text surviving onto an
+   unrelated card when there was nothing to substitute).
 
 The card markup is lifted from a real card in the page rather than reinvented,
 same principle as the case-page builder: reuse the design, do not reimplement it.
@@ -140,14 +150,71 @@ def hero_for(page: str) -> str | None:
     return src
 
 
+def _case_body_html(page: str) -> str | None:
+    """The target page's OWN `case-body` element, matched brace-for-brace so a
+    nested <div> inside a real write-up cannot truncate the scan early."""
+    f = HERE / page / "index.html"
+    if not f.exists():
+        return None
+    h = f.read_text()
+    m = re.search(r'<div class="case-body[^"]*">', h)
+    if not m:
+        return None
+    i = m.end()
+    depth = 1
+    for mm in re.finditer(r"<div\b|</div>", h[i:]):
+        depth += 1 if mm.group(0) == "<div" else -1
+        if depth == 0:
+            return h[i:i + mm.start()]
+    return None
+
+
+def public_blurb_for(page: str) -> str:
+    """A card blurb sourced ONLY from what the target page already shows the
+    public — never from `record.brief`.
+
+    `record.brief` is internal editorial and audit prose: contract values, cost
+    centres, admin-filename citations, org-tagging notes to a colleague. It is
+    not written for a visitor and it is not supposed to reach one. It did:
+    before this function existed, make_card() quoted `record.brief` straight
+    onto the live homepage, and the GIZ card read "EUR 14,850 lump sum, cost
+    centre G-018124, contract period 01.04.2026–31.03.2027…" to everyone who
+    loaded coplanai.com (caught 2026-08-26). The fix is to only ever quote text
+    that is already public — i.e. already rendered on the page the card links
+    to — so a leak here is structurally impossible rather than merely avoided.
+
+    A thin stub page (no `web draft.md` written yet) has nothing in its
+    `case-body` beyond the eyebrow line, so this returns "" for one — and an
+    empty return must make the CALLER remove the blurb paragraph outright,
+    never leave a stale one showing. That silent carry-over is the other half
+    of the same 2026-08-26 bug: Milan's cloned card, with no `record.brief` to
+    substitute, kept the sample card's ATHENS text instead of showing nothing.
+    """
+    body = _case_body_html(page)
+    if not body:
+        return ""
+    # the first REAL paragraph only — not the eyebrow, and not a heading like
+    # "The challenge" run on into the sentence after it (GIZ's card read "The
+    # challenge Connective Cities brings together…" before this excluded <h2>)
+    m = re.search(r'<p class="wp-block-paragraph[^"]*">(.*?)</p>', body, re.S)
+    if not m:
+        return ""
+    text = re.sub(r"<[^>]+>", " ", m.group(1))
+    text = H.unescape(text)
+    text = " ".join(text.split())
+    if len(text) < 40:                    # eyebrow-only stub — nothing real to quote
+        return ""
+    first = re.split(r"(?<=[.!?])\s+", text)[0]
+    return first[:180]
+
+
 def make_card(sample: str, e: dict, page: str, cat: str, names: dict) -> str:
     """A card for an entry that has no card yet — cloned from a real one."""
     title = (e.get("names") or {}).get("case") or e.get("title") or e["slug"]
     rec = e.get("record") or {}
     client = val(rec.get("client")) or val(rec.get("organisation")) or ""
     client = names.get(client, str(client).replace("-", " ").title()) if client else ""
-    brief = " ".join(str(rec.get("brief") or "").split())
-    brief = brief.split(". ")[0][:150] if brief else ""
+    blurb = public_blurb_for(page)          # NEVER rec.get("brief") — see its docstring
     c = sample
     c = re.sub(r'href="[^"]*"', f'href="{page}"', c, count=1)
     hero = hero_for(page)
@@ -165,9 +232,14 @@ def make_card(sample: str, e: dict, page: str, cat: str, names: dict) -> str:
                lambda m: m.group(1) + str(e.get("year") or "") + m.group(2), c, count=1)
     c = re.sub(r'(text-transform:uppercase">)[^<]*(<)',
                lambda m: m.group(1) + H.escape(client) + m.group(2), c, count=1)
-    if brief:
+    # NO SILENT CARRY-OVER. Either write real text or remove the paragraph
+    # outright — leaving the substitution unattempted is what let Milan's card
+    # show Athens' blurb (the sample's own text) under Milan's name and photo.
+    if blurb:
         c = re.sub(r'(margin:2px 0 0">)[^<]*(<)',
-                   lambda m: m.group(1) + H.escape(brief) + m.group(2), c, count=1)
+                   lambda m: m.group(1) + H.escape(blurb) + m.group(2), c, count=1)
+    else:
+        c = re.sub(r'<p[^>]*margin:2px 0 0"[^>]*>[^<]*</p>', "", c, count=1)
     return c
 
 
@@ -216,7 +288,17 @@ def main() -> int:
 
     cards = existing_cards(html)
     names = orgs()
-    sample = next(iter(cards.values()))
+    # THE SAMPLE MUST HAVE THE FULL REFERENCE MARKUP — image slot, sticker,
+    # title, client line, AND a blurb paragraph — because make_card() clones
+    # its structure verbatim and only ever fills or strips what is already
+    # there. `next(iter(cards.values()))` picked whichever card is FIRST in
+    # the file, which after 2026-08-26's fix can be one of the entries that
+    # legitimately has no blurb (a thin stub) — and cloning FROM a blurb-less
+    # sample means the substitution regex has nothing to match, so every
+    # clone made from it goes blank regardless of what public_blurb_for()
+    # found, even for an entry (like GIZ) that has real, safe text to show.
+    sample = next((c for c in cards.values() if 'margin:2px 0 0"' in c),
+                  next(iter(cards.values())))
     tabs, panels, chosen, cloned = [], [], [], []
     for n, cat in enumerate(ORDER):
         picks = sorted(by.get(cat, []), key=lambda x: -(x[0].get("year") or 0))[:PER_CATEGORY]
