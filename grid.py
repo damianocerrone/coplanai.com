@@ -299,9 +299,25 @@ def main() -> int:
     # found, even for an entry (like GIZ) that has real, safe text to show.
     sample = next((c for c in cards.values() if 'margin:2px 0 0"' in c),
                   next(iter(cards.values())))
-    tabs, panels, chosen, cloned = [], [], [], []
+    tabs, panels, chosen, cloned, no_image = [], [], [], [], []
     for n, cat in enumerate(ORDER):
-        picks = sorted(by.get(cat, []), key=lambda x: -(x[0].get("year") or 0))[:PER_CATEGORY]
+        # MOST RECENT WITH A REAL PHOTO, not most recent regardless. Damiano,
+        # 2026-08-26: several candidates in a task's pool are legacy pages with
+        # no hero image at all (a WordPress-mirror page that was never given
+        # one), and picking strictly by year put an empty picture frame on the
+        # homepage — Athens/GIZ/Milan/Wiesbaden all had no photo and still won
+        # a slot over a same-year or one-year-older case that did. Walk the
+        # pool newest-first and skip anything hero_for() cannot find an image
+        # for; the skipped ones are reported below, same as no_cat/no_page.
+        candidates = sorted(by.get(cat, []), key=lambda x: -(x[0].get("year") or 0))
+        picks = []
+        for e, page in candidates:
+            if len(picks) >= PER_CATEGORY:
+                break
+            if hero_for(page):
+                picks.append((e, page))
+            else:
+                no_image.append((cat, e.get("year"), page))
         out = []
         for e, page in picks:
             have = cards.get(page) or cards.get(page + "/")
@@ -330,6 +346,10 @@ def main() -> int:
     print(f"\nnot placeable: {len(no_cat)} without a category, {len(no_page)} without a page")
     if no_cat:
         print("  no category:", ", ".join(no_cat[:8]) + (" …" if len(no_cat) > 8 else ""))
+    if no_image:
+        print(f"\n{len(no_image)} candidate(s) skipped for having no photo (newer than what was picked, in some cases):")
+        for cat, y, page in no_image:
+            print(f"    {cat:9} {str(y):5} {page}")
 
     if DRY:
         print("\nDRY RUN — index.html untouched")
