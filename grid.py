@@ -1,4 +1,4 @@
-"""grid — regenerate the homepage proofgrid: the 3 most recent cases per category.
+"""grid — regenerate the homepage "four tasks" block: tabs, taglines, cards.
 
     python3 grid.py            # rewrite the marked block in index.html
     python3 grid.py --dry      # report only
@@ -6,24 +6,40 @@
 Damiano, 2026-08-03: "build an automatism [so] that those cases there are simply
 the most recent ones for that category."
 
-The grid is 3 cards x 4 categories (Imagine / Design / Evaluate / Learn). The
-category is `record.approach` in the ledger — it already used exactly those four
-words — and the page each entry owns is `ids.site_page.coplanai`, harvested from
-the live site on 2026-08-03. So the selection is a query, not a hand-list.
+The block is one tab and one panel per TASK — Imagine · Test · Shape · Improve,
+in the order a place travels them — each panel holding the 3 most recent cases
+carrying that task. The task is `record.approach` in the Portfolio OS ledger (the
+field key is still `approach`; its vocabulary became the engagement framework on
+2026-08-25) and the page each entry owns is `ids.site_page.coplanai`. So the
+selection is a query, not a hand-list.
+
+TASKS, NOT MANDATES. On this site `mandate` means what an engagement PRODUCES —
+"the output is always a mandate" is the homepage's own line, three paragraphs
+above this block. The four cells are what it ASKS PEOPLE TO DO.
+
+WHY THIS NOW OWNS THE TABS AND THE PANELS, not just the cards. Until 2026-08-25
+the markers sat INSIDE the first panel's .proofgrid, wrapping all twelve cards,
+because they were placed before the panels existed. Any run would have collapsed
+all four categories back into the Evaluate panel and left the other three empty —
+which is the exact bug the 2026-08-04 audit had repaired by hand. A generator
+whose output shape disagrees with the page's shape is a loaded gun; the fix is to
+let it own the whole shape.
 
 TWO THINGS KEEP THIS SAFE:
 
 1. **It owns only what is between the markers.** `index.html` is hand-written
-   marketing; a generator has no business rewriting it. The block was marked
-   once, by hand, with <!--POS:cards--> … <!--/POS:cards-->, and everything
-   outside is never touched. If the markers are missing it refuses.
+   marketing; a generator has no business rewriting it. The block is marked with
+   <!--POS:cards--> … <!--/POS:cards-->, and everything outside is never touched.
+   If the markers are missing it refuses.
 
-2. **A card is only emitted for an entry that has BOTH a category and a page.**
-   No category means it cannot be placed in a section; no page means the card
-   would link nowhere. Neither is guessed, and both shortfalls are reported.
+2. **A card is only emitted for an entry that has BOTH a task and a page.**
+   No task means it cannot be placed in a panel; no page means the card would
+   link nowhere. Neither is guessed, and both shortfalls are reported.
 
 The card markup is lifted from a real card in the page rather than reinvented,
 same principle as the case-page builder: reuse the design, do not reimplement it.
+The tab and panel chrome is written here, because it is four lines of it and it
+has to be able to state a task the page does not yet contain.
 """
 from __future__ import annotations
 
@@ -40,9 +56,26 @@ SITE = "coplanai"
 DRY = "--dry" in sys.argv
 PER_CATEGORY = 3
 
-# category -> the sticker colour the hand-written cards already use
-COLOUR = {"imagine": "terra", "design": "sky", "evaluate": "green", "learn": "gold"}
-ORDER = ("imagine", "design", "evaluate", "learn")
+# mandate -> the sticker colour. Chosen for CONTINUITY with what each band
+# inherited when the four categories were re-cut on 2026-08-25: Imagine kept its
+# own word and its terra, Shape took Design's sky because it inherits most of it,
+# Test took Learn's gold, Improve took Evaluate's green. Nobody has to relearn a
+# colour to read the same case.
+COLOUR = {"imagine": "terra", "test": "gold", "shape": "sky", "improve": "green"}
+# reading order is the order a place travels: vision, options, design, review.
+ORDER = ("imagine", "test", "shape", "improve")
+# the panel tagline: the mandate's own question, then what it asks of a client.
+# Straight from "The Mandate Matrix" §1 — not marketing written around it.
+TAGLINE = {
+    "imagine": ("What could it be?",
+                "Nothing is decided. People bring the future they want, and it becomes the brief."),
+    "test":    ("What if?",
+                "A scenario goes to people before anything is decided, and we learn what they could live with."),
+    "shape":   ("How should we design it?",
+                "What will be built is decided; how it takes shape is open, and what people propose feeds the design."),
+    "improve": ("How could it be better?",
+                "The design exists. People react to the actual drawings, while there is still time to revise."),
+}
 OPEN, CLOSE = "<!--POS:cards-->", "<!--/POS:cards-->"
 
 
@@ -138,6 +171,36 @@ def make_card(sample: str, e: dict, page: str, cat: str, names: dict) -> str:
     return c
 
 
+def tab(cat: str, first: bool) -> str:
+    """One pill in the tab row. `data-f` is the mandate key and is what the
+    page's own click handler matches on, so it must equal the panel's."""
+    c = COLOUR[cat]
+    return (f'<button class="ff-tab" data-f="{cat}"' + (' data-on="1"' if first else '')
+            + f' style="--fc:var(--{c})"><span class="d" style="background:var(--{c})">'
+            + f'</span>{cat.capitalize()}</button>')
+
+
+def panel(cat: str, cards_html: str, first: bool) -> str:
+    """One panel: the mandate's question in its own colour, the sentence that
+    locates a client under it, then the three most recent cases.
+
+    A TASK WITH NO PUBLISHED CASE SAYS SO. Improve is the real instance — the
+    portfolio's only Improve engagement has no ledger record and no publishable
+    page — and an empty panel under a live tab reads as a bug.
+    Saying "none published yet" is both true and the more useful thing for a
+    client to know: it is where the practice is thin."""
+    c = COLOUR[cat]
+    q, line = TAGLINE[cat]
+    body = cards_html or (
+        '<p style="grid-column:1/-1;color:var(--muted);font-family:var(--serif);'
+        'font-style:italic;margin:6px 0 2px">No case published under this task '
+        'yet &mdash; ask us about the work that is not on the site.</p>')
+    return (f'<div class="ff-panel" data-f="{cat}"' + (' data-on="1"' if first else '') + '>'
+            + f'<div class="ff-tagline" style="--fc:var(--{c})"><b>{H.escape(cat.capitalize())} &middot; '
+            + f'{H.escape(q)}</b> {H.escape(line)}</div>'
+            + f'<div class="proofgrid">{body}</div></div>')
+
+
 def main() -> int:
     idx = HERE / "index.html"
     html = idx.read_text()
@@ -154,9 +217,10 @@ def main() -> int:
     cards = existing_cards(html)
     names = orgs()
     sample = next(iter(cards.values()))
-    out, chosen, cloned = [], [], []
-    for cat in ORDER:
+    tabs, panels, chosen, cloned = [], [], [], []
+    for n, cat in enumerate(ORDER):
         picks = sorted(by.get(cat, []), key=lambda x: -(x[0].get("year") or 0))[:PER_CATEGORY]
+        out = []
         for e, page in picks:
             have = cards.get(page) or cards.get(page + "/")
             if have:
@@ -165,11 +229,18 @@ def main() -> int:
                 out.append(make_card(sample, e, page, cat, names))
                 cloned.append(page)
             chosen.append((cat, e.get("year"), page))
+        tabs.append(tab(cat, first=(n == 0)))
+        panels.append(panel(cat, "".join(out), first=(n == 0)))
 
-    block = OPEN + "".join(out) + CLOSE
+    block = (OPEN
+             + '<div class="ff-tabs" role="tablist">' + "".join(tabs)
+             + '<a class="ff-tab ff-tab-all" href="use-cases/">See all use cases '
+               '<span aria-hidden="true">&rarr;</span></a></div>'
+             + "".join(panels)
+             + CLOSE)
     new = re.sub(re.escape(OPEN) + r"[\s\S]*?" + re.escape(CLOSE), lambda _: block, html, count=1)
 
-    print(f"cards: {len(out)}   (new cards cloned: {len(cloned)})")
+    print(f"cards: {len(chosen)}   (new cards cloned: {len(cloned)})")
     for cat in ORDER:
         picks = [c for c in chosen if c[0] == cat]
         print(f"  {cat:9} {len(by.get(cat, [])):>2} available -> " +
