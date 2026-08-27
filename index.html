@@ -417,6 +417,55 @@
   .pfeat b{font-weight:600; font-size:13.5px; line-height:1.28; letter-spacing:-.01em}
   .pfeat span{font-size:12px; color:var(--muted); line-height:1.42}
 
+  /* ── ONE BLOCK, ONE VIEW ──────────────────────────────────────────────
+     Damiano, 2026-08-27: the framework block ran past the fold and the CTA was
+     cut. Above 1040px the pair is now HEIGHT-DRIVEN: it takes what the viewport
+     leaves after the heading, and the matrix and the gallery scale into that
+     budget rather than setting their own. Clamped so it neither crushes on a
+     short laptop nor balloons on a tall monitor. */
+  @media (min-width:1041px){
+    section#framework{padding-top:clamp(28px,3.2vw,50px)}
+    #framework .dhead{margin-bottom:clamp(12px,1.6vw,20px)}
+    #framework .dhead h2{font-size:clamp(28px,3.3vw,42px)}
+    #framework .dhead p{margin-top:8px; font-size:13.5px; max-width:74ch}
+    #framework .fwrap{height:calc(100svh - 228px); min-height:576px; max-height:1010px}
+
+    #framework .mxcard{height:100%; display:flex; flex-direction:column;
+      overflow:hidden; padding:clamp(14px,1.7vw,24px)}
+    #framework .mxplot{flex:1; min-height:0; display:flex; padding:18px 4px}
+    #framework .mxtiles{flex:1; min-height:0; grid-auto-rows:minmax(0,1fr);
+      gap:clamp(30px,3.4vw,54px)}
+    #framework .qd{min-height:0; overflow:hidden; padding:15px 16px}
+    #framework .qd .nm{font-size:clamp(21px,2.1vw,29px)}
+    #framework .qd .open{overflow:auto; scrollbar-width:thin}
+    #framework .mxfoot{flex:none}
+
+    #framework .galcol{height:100%; display:flex; flex-direction:column; min-height:0}
+    #framework #galbody{flex:1; min-height:0; display:flex; flex-direction:column}
+    #framework .galgrid{flex:1; min-height:0; grid-auto-rows:minmax(0,1fr)}
+    #framework .galempty{overflow:auto}
+    #framework .gcard{min-height:0}
+    #framework .gcard .gp{flex:1; min-height:0; aspect-ratio:auto}
+    #framework .gcard .gp > img{height:100%}
+    #framework .gcard h4{min-height:0; flex:none}
+    #framework .galmore{flex:none; margin-top:12px; padding:13px 13px 13px 20px; font-size:15px}
+    #framework .galrest{margin-top:8px}
+  }
+
+  /* the signals bento is one block, so it gets the same treatment */
+  @media (min-width:1041px){
+    section#signals{padding-top:clamp(28px,3.2vw,50px)}
+    #signals .dhead{margin-bottom:clamp(12px,1.6vw,20px)}
+    #signals .dhead h2{font-size:clamp(28px,3.3vw,42px)}
+    #signals .sgrid{height:calc(100svh - 236px); min-height:520px; max-height:880px;
+      grid-auto-rows:minmax(0,1fr)}
+    #signals a.sg{min-height:0}
+    #signals .sg .sgph{flex:1; min-height:0; aspect-ratio:auto}
+    #signals .sg .sgph img{height:100%}
+    #signals .sg .sgb{flex:none}
+    #signals .sgall{margin-top:12px}
+  }
+
   /* ══ TRUSTED · the record, the map, the clients ══ */
   /* the bento: mixed cards, one big annotated photograph, real numbers */
   .bento{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); grid-auto-rows:154px; gap:13px}
@@ -1212,7 +1261,7 @@
   </section>
 
   <!-- ══ 05 · SIGNALS ══ -->
-  <section class="band">
+  <section class="band" id="signals">
     <div class="dhead" style="--ec:var(--blue-deep)">
       <span class="no">05 · signals</span>
       <h2>The latest, <em>from the field</em></h2>
