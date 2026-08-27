@@ -1216,5 +1216,41 @@ strong{font-weight:600}
 </script>
 <div class="wpc-filters-overlay"></div>
 <link rel='stylesheet' id='coplanai-reskin' href='../_static/reskin.css?v=ae9cf6e7' type='text/css' media='all' />
+<link rel="stylesheet" id="coplanai-capsule" href="../_static/capsule-web.css?v=25b6b6d0" type="text/css" media="all" />
+<script id="uc-flag-inject">
+/* Two things the static markup cannot carry on its own.
+   1 · THE FLAG. Each engagement's country, in the scooped corner of its card —
+       derived from the engagement map's own city->country pairs, hand-resolved
+       for the ten cards whose slug names no mapped city.
+   2 · THE IMAGELESS CARDS. Eleven cases have no photograph on disk. Left alone
+       they render as blank white plates and read as broken (Damiano, on the
+       homepage: "look how ugly is this"). They get a flat panel in their task's
+       colour carrying that task's glyph, so an absent picture looks deliberate.
+       The house rule stands: photography is real or absent, never stock. */
+(function(){
+  var F = {"../portfolio/enschede-blue-green/": ["nl", "Netherlands"], "../portfolio/oman-governors/": ["om", "Oman"], "../portfolio/newcastle-city-of-longevity/": ["gb", "United Kingdom"], "../portfolio/zamanand-munich/": ["de", "Germany"], "../portfolio/kiezlabor/": ["de", "Germany"], "../portfolio/taltech-campus/": ["ee", "Estonia"], "../portfolio/kyiv-reconstruction/": ["ua", "Ukraine"], "../portfolio/athens-civinet/": ["gr", "Greece"], "../portfolio/skopje-regreening/": ["mk", "North Macedonia"], "../portfolio/jyvaskyla-library/": ["fi", "Finland"], "../portfolio/jyvaskyla-recenter/": ["fi", "Finland"], "../portfolio/connect-east-cleveland/": ["us", "United States"], "../portfolio/lulea-children-workshop/": ["se", "Sweden"], "../portfolio/paces-stockholm/": ["se", "Sweden"], "../portfolio/vantaa-havukoski/": ["fi", "Finland"], "../portfolio/batumi-future-fit-cities/": ["ge", "Georgia"], "../portfolio/pristina-cluster/": ["xk", "Kosovo"], "../portfolio/valencia-citydna/": ["es", "Spain"], "../portfolio/nusantara-2024": ["id", "Indonesia"], "../portfolio/lahti-city-center-vision-2040/": ["fi", "Finland"], "../portfolio/milan-digital-week/": ["it", "Italy"], "../portfolio/nusantara-2023": ["id", "Indonesia"], "../portfolio/tallinn-liivalaia/": ["ee", "Estonia"], "../portfolio/forum-virium-helsinki/": ["fi", "Finland"], "../portfolio/bologna-officine-conoscenza/": ["it", "Italy"], "../portfolio/helsinki-market-squares": ["fi", "Finland"], "../portfolio/dubai-edge-of-government/": ["ae", "United Arab Emirates"], "../portfolio/wiesbaden-child-friendly/": ["de", "Germany"], "../portfolio/oulu-centre-vision/": ["fi", "Finland"], "../portfolio/manila-feminist-cities/": ["ph", "Philippines"], "../portfolio/wuf13-baku/": ["az", "Azerbaijan"], "../portfolio/lulea-urban-testbeds/": ["se", "Sweden"], "../portfolio/kaarina-market-square/": ["fi", "Finland"], "../portfolio/vienna-supergraetzl/": ["at", "Austria"], "../portfolio/turku-biodiversity-parks/": ["fi", "Finland"], "../portfolio/urbanist-dubai/": ["ae", "United Arab Emirates"], "../portfolio/avalinn-tallinn": ["ee", "Estonia"], "../portfolio/helsinki-summer-streets/": ["fi", "Finland"], "../portfolio/dubai-municipality-sustainability/": ["ae", "United Arab Emirates"], "../portfolio/m4eg-mayors-network/": ["tr", "Türkiye"], "../portfolio/humanizing-digital-twins/": ["ee", "Estonia"], "../portfolio/denk-zueri-neu/": ["ch", "Switzerland"], "../portfolio/estonian-museum-of-natural-history/": ["ee", "Estonia"], "../portfolio/kalamaja-street-design/": ["ee", "Estonia"], "../portfolio/eindhoven-ai-in-the-hood/": ["nl", "Netherlands"], "../portfolio/playgrounds-to-planning/": ["be", "Belgium"], "../portfolio/panama-climate-futures/": ["pa", "Panama"], "../portfolio/hamburg-youth-testbeds/": ["de", "Germany"], "../portfolio/giz-green-corridors-cairo/": ["eg", "Egypt"]};
+  var G = {"Imagine": "<path d=\"M10 2v4M10 14v4M2 10h4M14 10h4M4.5 4.5l2.8 2.8M12.7 12.7l2.8 2.8M15.5 4.5l-2.8 2.8M7.3 12.7l-2.8 2.8\" stroke=\"CC\" stroke-width=\"1.1\" stroke-linecap=\"round\"/>", "Test": "<path d=\"M10 3v6m0 0l-5 7m5-7l5 7M3.5 16h4M12.5 16h4\" stroke=\"CC\" stroke-width=\"1.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>", "Shape": "<path d=\"M3 16 C 6 6, 13 5, 17 4\" stroke=\"CC\" stroke-width=\"1.1\" stroke-linecap=\"round\" fill=\"none\"/><circle cx=\"3\" cy=\"16\" r=\"1.6\" fill=\"CC\"/><circle cx=\"17\" cy=\"4\" r=\"1.6\" fill=\"CC\"/>", "Improve": "<path d=\"M16 9 A6.5 6.5 0 1 0 15 13\" stroke=\"CC\" stroke-width=\"1.1\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M16 4.5V9h-4.5\" stroke=\"CC\" stroke-width=\"1.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>"};
+  var C = {"Imagine": "#0E6A5C", "Test": "#4A3FB5", "Shape": "#3E6B2E", "Improve": "#A8391F"};
+  document.querySelectorAll("a.uc-card[href]").forEach(function(a){
+    var th = a.querySelector(".uc-thumb"); if(!th) return;
+    var task = a.getAttribute("data-a");
+    if(!th.querySelector("img") && G[task]){
+      th.classList.add("uc-noimg");
+      th.style.setProperty("--tc", C[task]);
+      var g = document.createElement("span"); g.className = "uc-ghost";
+      g.innerHTML = '<svg viewBox="0 0 20 20" fill="none" aria-hidden="true">' +
+        G[task].replace(/CC/g, C[task]) + '</svg>';
+      th.insertBefore(g, th.firstChild);
+    }
+    var f = F[a.getAttribute("href")];
+    if(f && !th.querySelector(".uc-notch")){
+      var n = document.createElement("span"); n.className = "uc-notch";
+      n.innerHTML = '<span class="uc-flag"><img src="../_static/flags/' + f[0] +
+        '.svg" alt="' + f[1] + '" title="' + f[1] + '"></span>';
+      th.appendChild(n);
+    }
+  });
+})();
+</script>
 </body>
 </html>
