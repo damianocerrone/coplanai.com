@@ -48,3 +48,4 @@ _preview-*.html
 # under it and (b) commit nested checkouts into a repo that is served as a
 # website. Ignored, never published.
 .claude/
+.index-pre-capsule.html.bak
