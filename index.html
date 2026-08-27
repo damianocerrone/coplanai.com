@@ -386,71 +386,58 @@
     background:rgba(255,255,255,.16); color:#fff; border:0}
 
   /* ══ 04 · THE PLATFORM ══
-     Three surfaces, and every picture is one feature caught mid-task in the real
-     app — not a landing page, not chrome (Damiano, 2026-08-27). Sizes come from
-     the V3 capture manifest, so a shot is never scaled up. */
-  .psurf{background:var(--sbg,var(--paper)); border-radius:28px;
-    padding:clamp(20px,2.6vw,34px) clamp(16px,2.2vw,28px) clamp(22px,2.8vw,34px)}
+     One plate per surface: the feature index on the left, one large screenshot
+     on the right that swaps as you move down it. Every capture is shown at a
+     size it can be read at, which the old three-card row never was. */
+  .psurf{background:var(--sbg,var(--paper)); border-radius:28px; overflow:hidden;
+    display:grid; grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);
+    gap:clamp(16px,2.2vw,30px); padding:clamp(20px,2.6vw,34px)}
   .psurf + .psurf{margin-top:14px}
-  .psurf-head{display:flex; align-items:center; gap:11px; flex-wrap:wrap; margin-bottom:2px}
+  @media(max-width:1040px){ .psurf{grid-template-columns:minmax(0,1fr)} }
+
+  .pindex{display:flex; flex-direction:column; min-width:0}
+  .psurf-head{display:flex; align-items:center; gap:11px; flex-wrap:wrap}
   .psurf-head .pn{font-family:var(--fm); font-size:9.5px; letter-spacing:.15em;
     text-transform:uppercase; color:var(--sink,var(--blue-deep))}
   .psurf-head .pwho{font-family:var(--fm); font-size:8.5px; letter-spacing:.12em;
     text-transform:uppercase; color:var(--ink2); background:rgba(255,255,255,.72);
     border-radius:var(--pill); padding:5px 11px}
-  .psurf h3{font-family:var(--fd); font-weight:600; font-size:clamp(25px,2.7vw,36px);
-    line-height:1.04; letter-spacing:-.025em; color:var(--sink,var(--ink)); margin:5px 0 7px}
-  .psurf > p.pblurb{font-size:14.5px; color:var(--ink2); line-height:1.45;
-    max-width:64ch; margin-bottom:16px}
-  .pfeats{display:grid; gap:13px; grid-template-columns:repeat(3,minmax(0,1fr))}
-  .pfeats.phone{grid-template-columns:repeat(4,minmax(0,1fr))}
-  @media(max-width:1040px){ .pfeats{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .pfeats.phone{grid-template-columns:repeat(2,minmax(0,1fr))} }
-  @media(max-width:620px){ .pfeats, .pfeats.phone{grid-template-columns:minmax(0,1fr)} }
-  .pfeat{background:var(--paper); border-radius:20px; box-shadow:var(--sh);
-    padding:9px 9px 14px; display:flex; flex-direction:column; gap:10px}
-  .pfeat .pshot{display:block; border-radius:13px; overflow:hidden; background:var(--wash);
-    border:1px solid var(--line2)}
-  .pfeat .pshot img{display:block; width:100%; height:auto}
-  .pfeats.phone .pfeat .pshot{border:0; background:transparent}
-  .pfeat figcaption{padding:0 6px; display:flex; flex-direction:column; gap:4px}
-  .pfeat b{font-weight:600; font-size:13.5px; line-height:1.28; letter-spacing:-.01em}
-  .pfeat span{font-size:12px; color:var(--muted); line-height:1.42}
+  .psurf h3{font-family:var(--fd); font-weight:600; font-size:clamp(26px,2.9vw,38px);
+    line-height:1.03; letter-spacing:-.026em; color:var(--sink,var(--ink)); margin:7px 0 8px}
+  .psurf .pblurb{font-size:14px; color:var(--ink2); line-height:1.45; max-width:46ch;
+    margin-bottom:15px}
 
-  /* ── ONE BLOCK, ONE VIEW ──────────────────────────────────────────────
-     Damiano, 2026-08-27: the framework block ran past the fold and the CTA was
-     cut. Above 1040px the pair is now HEIGHT-DRIVEN: it takes what the viewport
-     leaves after the heading, and the matrix and the gallery scale into that
-     budget rather than setting their own. Clamped so it neither crushes on a
-     short laptop nor balloons on a tall monitor. */
-  @media (min-width:1041px){
-    section#framework{padding-top:clamp(28px,3.2vw,50px)}
-    #framework .dhead{margin-bottom:clamp(12px,1.6vw,20px)}
-    #framework .dhead h2{font-size:clamp(28px,3.3vw,42px)}
-    #framework .dhead p{margin-top:8px; font-size:13.5px; max-width:74ch}
-    #framework .fwrap{height:calc(100svh - 228px); min-height:576px; max-height:1010px}
+  /* the index: numbered rows, one open at a time */
+  .prows{display:flex; flex-direction:column; margin-top:2px}
+  .prow{display:grid; grid-template-columns:30px minmax(0,1fr); gap:11px; text-align:left;
+    align-items:start; padding:11px 12px; border-radius:14px; cursor:pointer;
+    border-top:1px solid rgba(15,32,54,.09); background:transparent;
+    transition:background .18s ease}
+  .prow:first-child{border-top:0}
+  .prow:hover{background:rgba(255,255,255,.5)}
+  .prow[aria-pressed="true"]{background:var(--paper); box-shadow:var(--sh); border-top-color:transparent}
+  .prow[aria-pressed="true"] + .prow{border-top-color:transparent}
+  .pnum{font-family:var(--fm); font-size:9.5px; letter-spacing:.06em; color:var(--muted);
+    padding-top:3px}
+  .prow[aria-pressed="true"] .pnum{color:var(--sink)}
+  .ptxt b{display:block; font-weight:600; font-size:14px; line-height:1.3;
+    letter-spacing:-.01em; color:var(--ink)}
+  .ptxt > span{display:none; font-size:12.5px; color:var(--ink2); line-height:1.45; margin-top:4px}
+  .prow[aria-pressed="true"] .ptxt > span{display:block}
 
-    #framework .mxcard{height:100%; display:flex; flex-direction:column;
-      overflow:hidden; padding:clamp(14px,1.7vw,24px)}
-    #framework .mxplot{flex:1; min-height:0; display:flex; padding:18px 4px}
-    #framework .mxtiles{flex:1; min-height:0; grid-auto-rows:minmax(0,1fr);
-      gap:clamp(30px,3.4vw,54px)}
-    #framework .qd{min-height:0; overflow:hidden; padding:15px 16px}
-    #framework .qd .nm{font-size:clamp(21px,2.1vw,29px)}
-    #framework .qd .open{overflow:auto; scrollbar-width:thin}
-    #framework .mxfoot{flex:none}
-
-    #framework .galcol{height:100%; display:flex; flex-direction:column; min-height:0}
-    #framework #galbody{flex:1; min-height:0; display:flex; flex-direction:column}
-    #framework .galgrid{flex:1; min-height:0; grid-auto-rows:minmax(0,1fr)}
-    #framework .galempty{overflow:auto}
-    #framework .gcard{min-height:0}
-    #framework .gcard .gp{flex:1; min-height:0; aspect-ratio:auto}
-    #framework .gcard .gp > img{height:100%}
-    #framework .gcard h4{min-height:0; flex:none}
-    #framework .galmore{flex:none; margin-top:12px; padding:13px 13px 13px 20px; font-size:15px}
-    #framework .galrest{margin-top:8px}
-  }
+  /* the stage: one picture, big */
+  .pstage{position:relative; display:flex; align-items:center; justify-content:center;
+    min-width:0}
+  .pstage figure{width:100%; margin:0}
+  .pstage figure[hidden]{display:none}
+  .pstage img{display:block; width:100%; height:auto; border-radius:16px;
+    box-shadow:0 18px 44px -22px rgba(15,32,54,.42); background:var(--paper)}
+  /* a phone is portrait — it must not be blown up to the width of a laptop */
+  .pstage.phone figure{display:flex; justify-content:center}
+  /* this must outrank the .phone rule above, or every phone shows at once */
+  .pstage figure[hidden], .pstage.phone figure[hidden]{display:none}
+  .pstage.phone img{width:auto; max-width:100%; max-height:clamp(420px,52vh,620px);
+    border-radius:0; box-shadow:none}
 
   /* the signals bento is one block, so it gets the same treatment */
   @media (min-width:1041px){
@@ -1142,7 +1129,7 @@
   <section class="band">
     <div class="dhead" style="--ec:var(--coral-action)">
       <span class="no">03 · the record</span>
-      <h2>Trusted across the <em>public realm</em></h2>
+      <h2>CoPlanning <em>actions</em></h2>
       <p>Ministries, city halls, universities, development agencies and design practices. What they get
         back is not a picture — it is evidence a council can act on.</p>
     </div>
@@ -1255,9 +1242,9 @@
         with no account. The same record carries both sides — and it is the real product below, not a mock-up.</p>
     </div>
 
-    <div class="psurf" style="--sbg:var(--blue-wash); --sink:var(--blue-deep)"><div class="psurf-head"><span class="pn">01 · the platform</span><span class="pwho">desktop · planning teams</span></div><h3>CoPlan Studio</h3><p class="pblurb">The desktop workspace where a planning team turns a written brief into checked, rendered design options.</p><div class="pfeats"><figure class="pfeat"><span class="pshot"><img loading="lazy" width="1600" height="977" src="_static/shots/studio-brief.jpg" alt="It starts with an image and your brief"></span><figcaption><b>It starts with an image and your brief</b><span>The morning screen: a site photograph, the brief written in plain words, and the six inputs the agent is allowed to draw on.</span></figcaption></figure><figure class="pfeat"><span class="pshot"><img loading="lazy" width="1600" height="977" src="_static/shots/studio-variations.jpg" alt="Twenty variations from one brief"></span><figcaption><b>Twenty variations from one brief</b><span>One brief generates a batch of design variations in three groups, each carrying its own seed, creativity setting and on-brief grading.</span></figcaption></figure><figure class="pfeat"><span class="pshot"><img loading="lazy" width="1600" height="977" src="_static/shots/studio-compliance.jpg" alt="Checked against the planning documents"></span><figcaption><b>Checked against the planning documents</b><span>Every clause is graded against the design code and guidance the project was given, and the measured coverage is shown against target, before any render is paid for.</span></figcaption></figure></div></div>
-      <div class="psurf" style="--sbg:var(--panel); --sink:var(--ink)"><div class="psurf-head"><span class="pn">02 · the platform</span><span class="pwho">desktop · whoever sets the engagement up</span></div><h3>The Configurator</h3><p class="pblurb">Where an engagement is set up: six lines that decide what is asked, of whom, and what the participant's phone will say.</p><div class="pfeats"><figure class="pfeat"><span class="pshot"><img loading="lazy" width="1600" height="1044" src="_static/shots/configurator-four-tasks.jpg" alt="The four tasks, on two axes"></span><figcaption><b>The four tasks, on two axes</b><span>What the engagement asks for is set on one matrix — imagine, test, shape or improve — and every other line is drafted from it.</span></figcaption></figure><figure class="pfeat"><span class="pshot"><img loading="lazy" width="1600" height="1044" src="_static/shots/configurator-audiences.jpg" alt="Who takes part"></span><figcaption><b>Who takes part</b><span>Eleven audiences, a size band and the way the session is actually run, picked as photographs rather than from a dropdown.</span></figcaption></figure><figure class="pfeat"><span class="pshot"><img loading="lazy" width="1600" height="1044" src="_static/shots/configurator-extent.jpg" alt="How much ground it covers"></span><figcaption><b>How much ground it covers</b><span>The extent of the thing being designed is chosen from real places — a spot, a building, a square, a street, a block, an area.</span></figcaption></figure></div></div>
-      <div class="psurf" style="--sbg:var(--coral-wash); --sink:var(--coral-action)"><div class="psurf-head"><span class="pn">03 · the platform</span><span class="pwho">phone · residents and stakeholders</span></div><h3>The participant app</h3><p class="pblurb">What a resident holds: a street, a question, and their own idea coming back as a picture — with no account at any point.</p><div class="pfeats phone"><figure class="pfeat"><span class="pshot"><img loading="lazy" width="389" height="760" src="_static/shots/mobile-your-picture.jpg" alt="Your words become a picture"></span><figcaption><b>Your words become a picture</b><span>What the resident typed comes back as an image of their actual street, which is what the rest of the room then votes on.</span></figcaption></figure><figure class="pfeat"><span class="pshot"><img loading="lazy" width="389" height="760" src="_static/shots/mobile-say-it.jpg" alt="Say it in your own words"></span><figcaption><b>Say it in your own words</b><span>The resident types what they want in ordinary language; nothing asks them to use planning vocabulary.</span></figcaption></figure><figure class="pfeat"><span class="pshot"><img loading="lazy" width="389" height="760" src="_static/shots/mobile-arrive.jpg" alt="In with a QR, no account"></span><figcaption><b>In with a QR, no account</b><span>A poster QR or a short code opens the session — no sign-up, no email, no name required.</span></figcaption></figure><figure class="pfeat"><span class="pshot"><img loading="lazy" width="389" height="760" src="_static/shots/mobile-vote.jpg" alt="Sift what everyone made"></span><figcaption><b>Sift what everyone made</b><span>Each participant sorts the room's proposals one at a time, so the count comes from people rather than from the model.</span></figcaption></figure></div></div>
+    <section class="psurf" data-k="studio" style="--sbg:var(--blue-wash); --sink:var(--blue-deep)"><div class="pindex"><div class="psurf-head"><span class="pn">01 · the platform</span><span class="pwho">desktop · planning teams</span></div><h3>CoPlan Studio</h3><p class="pblurb">The desktop workspace where a planning team turns a written brief into checked, rendered design options.</p><div class="prows"><button class="prow" data-i="0" aria-pressed="true"><span class="pnum">01</span><span class="ptxt"><b>It starts with an image and your brief</b><span>The morning screen: a site photograph, the brief written in plain words, and the six inputs the agent is allowed to draw on.</span></span></button><button class="prow" data-i="1" aria-pressed="false"><span class="pnum">02</span><span class="ptxt"><b>Twenty variations from one brief</b><span>One brief generates a batch of design variations in three groups, each carrying its own seed, creativity setting and on-brief grading.</span></span></button><button class="prow" data-i="2" aria-pressed="false"><span class="pnum">03</span><span class="ptxt"><b>Checked against the planning documents</b><span>Every clause is graded against the design code and guidance the project was given, and the measured coverage is shown against target, before any render is paid for.</span></span></button><button class="prow" data-i="3" aria-pressed="false"><span class="pnum">04</span><span class="ptxt"><b>Favourites compared at one scale</b><span>Shortlisted variations sit side by side as whole frames at the same scale, with comments landing on the exact image.</span></span></button><button class="prow" data-i="4" aria-pressed="false"><span class="pnum">05</span><span class="ptxt"><b>Renders from stored cameras</b><span>The chosen plan renders to a fixed set of viewpoints in one pass, so every round is framed identically.</span></span></button><button class="prow" data-i="5" aria-pressed="false"><span class="pnum">06</span><span class="ptxt"><b>Before and after, same frame</b><span>The touch-up room wipes between the existing street and the proposal on a locked camera, so a change is a change and not a new crop.</span></span></button></div></div><div class="pstage"><figure class="pshot" data-i="0"><img loading="lazy" width="1600" height="977" src="_static/shots/studio-brief.jpg" alt="It starts with an image and your brief"></figure><figure class="pshot" data-i="1" hidden><img loading="lazy" width="1600" height="977" src="_static/shots/studio-variations.jpg" alt="Twenty variations from one brief"></figure><figure class="pshot" data-i="2" hidden><img loading="lazy" width="1600" height="977" src="_static/shots/studio-compliance.jpg" alt="Checked against the planning documents"></figure><figure class="pshot" data-i="3" hidden><img loading="lazy" width="1600" height="977" src="_static/shots/studio-compare.jpg" alt="Favourites compared at one scale"></figure><figure class="pshot" data-i="4" hidden><img loading="lazy" width="1600" height="977" src="_static/shots/studio-renders.jpg" alt="Renders from stored cameras"></figure><figure class="pshot" data-i="5" hidden><img loading="lazy" width="1600" height="977" src="_static/shots/studio-touchup.jpg" alt="Before and after, same frame"></figure></div></section>
+      <section class="psurf" data-k="configurator" style="--sbg:var(--panel); --sink:var(--ink)"><div class="pindex"><div class="psurf-head"><span class="pn">02 · the platform</span><span class="pwho">desktop · whoever sets the engagement up</span></div><h3>The Configurator</h3><p class="pblurb">Where an engagement is set up: six lines that decide what is asked, of whom, and what the participant's phone will say.</p><div class="prows"><button class="prow" data-i="0" aria-pressed="true"><span class="pnum">01</span><span class="ptxt"><b>The four tasks, on two axes</b><span>What the engagement asks for is set on one matrix — imagine, test, shape or improve — and every other line is drafted from it.</span></span></button><button class="prow" data-i="1" aria-pressed="false"><span class="pnum">02</span><span class="ptxt"><b>Who takes part</b><span>Eleven audiences, a size band and the way the session is actually run, picked as photographs rather than from a dropdown.</span></span></button><button class="prow" data-i="2" aria-pressed="false"><span class="pnum">03</span><span class="ptxt"><b>How much ground it covers</b><span>The extent of the thing being designed is chosen from real places — a spot, a building, a square, a street, a block, an area.</span></span></button></div></div><div class="pstage"><figure class="pshot" data-i="0"><img loading="lazy" width="1600" height="1044" src="_static/shots/configurator-four-tasks.jpg" alt="The four tasks, on two axes"></figure><figure class="pshot" data-i="1" hidden><img loading="lazy" width="1600" height="1044" src="_static/shots/configurator-audiences.jpg" alt="Who takes part"></figure><figure class="pshot" data-i="2" hidden><img loading="lazy" width="1600" height="1044" src="_static/shots/configurator-extent.jpg" alt="How much ground it covers"></figure></div></section>
+      <section class="psurf" data-k="mobile" style="--sbg:var(--coral-wash); --sink:var(--coral-action)"><div class="pindex"><div class="psurf-head"><span class="pn">03 · the platform</span><span class="pwho">phone · residents and stakeholders</span></div><h3>The participant app</h3><p class="pblurb">What a resident holds: a street, a question, and their own idea coming back as a picture — with no account at any point.</p><div class="prows"><button class="prow" data-i="0" aria-pressed="true"><span class="pnum">01</span><span class="ptxt"><b>Your words become a picture</b><span>What the resident typed comes back as an image of their actual street, which is what the rest of the room then votes on.</span></span></button><button class="prow" data-i="1" aria-pressed="false"><span class="pnum">02</span><span class="ptxt"><b>Say it in your own words</b><span>The resident types what they want in ordinary language; nothing asks them to use planning vocabulary.</span></span></button><button class="prow" data-i="2" aria-pressed="false"><span class="pnum">03</span><span class="ptxt"><b>In with a QR, no account</b><span>A poster QR or a short code opens the session — no sign-up, no email, no name required.</span></span></button><button class="prow" data-i="3" aria-pressed="false"><span class="pnum">04</span><span class="ptxt"><b>Sift what everyone made</b><span>Each participant sorts the room's proposals one at a time, so the count comes from people rather than from the model.</span></span></button><button class="prow" data-i="4" aria-pressed="false"><span class="pnum">05</span><span class="ptxt"><b>Kept in your own words</b><span>What the picture could not show is carried verbatim onto the participant's card, alongside everything they made.</span></span></button><button class="prow" data-i="5" aria-pressed="false"><span class="pnum">06</span><span class="ptxt"><b>One picture, six seats, live</b><span>In a room session the table's lines are woven into a single picture as it is made, and every line is shown landing or not landing.</span></span></button><button class="prow" data-i="6" aria-pressed="false"><span class="pnum">07</span><span class="ptxt"><b>Your places, kept on your phone</b><span>Afterwards every session the resident sat in stays on one map on their own phone, following what the city decided.</span></span></button></div></div><div class="pstage phone"><figure class="pshot" data-i="0"><img loading="lazy" width="389" height="760" src="_static/shots/mobile-your-picture.jpg" alt="Your words become a picture"></figure><figure class="pshot" data-i="1" hidden><img loading="lazy" width="389" height="760" src="_static/shots/mobile-say-it.jpg" alt="Say it in your own words"></figure><figure class="pshot" data-i="2" hidden><img loading="lazy" width="389" height="760" src="_static/shots/mobile-arrive.jpg" alt="In with a QR, no account"></figure><figure class="pshot" data-i="3" hidden><img loading="lazy" width="389" height="760" src="_static/shots/mobile-vote.jpg" alt="Sift what everyone made"></figure><figure class="pshot" data-i="4" hidden><img loading="lazy" width="389" height="760" src="_static/shots/mobile-your-card.jpg" alt="Kept in your own words"></figure><figure class="pshot" data-i="5" hidden><img loading="lazy" width="389" height="760" src="_static/shots/mobile-live-weave.jpg" alt="One picture, six seats, live"></figure><figure class="pshot" data-i="6" hidden><img loading="lazy" width="389" height="760" src="_static/shots/mobile-my-places.jpg" alt="Your places, kept on your phone"></figure></div></section>
   </section>
 
   <!-- ══ 05 · SIGNALS ══ -->
@@ -1414,6 +1401,20 @@ var MAPDATA = [{"c":"Turku","n":"Finland","lat":60.452,"lon":22.267,"p":"Urban B
     };
     n.addEventListener("mouseenter", enter); n.addEventListener("mouseleave", leave);
     n.addEventListener("click", enter); n.addEventListener("focus", enter); n.addEventListener("blur", leave);
+  });
+
+  /* ══ 04 · THE PLATFORM · index row picks the picture ══ */
+  document.querySelectorAll(".psurf").forEach(function(surf){
+    var rows = surf.querySelectorAll(".prow"),
+        shots = surf.querySelectorAll(".pstage figure");
+    function pick(i){
+      rows.forEach(function(r,k){ r.setAttribute("aria-pressed", String(k===i)); });
+      shots.forEach(function(s,k){ s.hidden = (k!==i); });
+    }
+    rows.forEach(function(r,i){
+      r.addEventListener("click", function(){ pick(i); });
+      r.addEventListener("mouseenter", function(){ pick(i); });
+    });
   });
 
   /* ══ THE CLIENT WALL · pill filter ══ */
