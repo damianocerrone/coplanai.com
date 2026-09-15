@@ -61,7 +61,7 @@ from collections import defaultdict
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-POS = Path("/Users/uai/SPIN Unit Dropbox/Damiano Cerrone/Claude code/Portfolio OS")
+POS = Path("/Users/uai/SPIN Unit Dropbox/General Management/Portfolio OS")
 SITE = "coplanai"
 DRY = "--dry" in sys.argv
 PER_CATEGORY = 3
