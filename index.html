@@ -101,6 +101,7 @@
 .vn text{pointer-events:none}
 .vn .t-name{font-family:var(--f-name);font-weight:var(--w-name);letter-spacing:-.012em;fill:var(--ink)}
 .vn .t-role{font-family:var(--f-label);font-weight:var(--w-label);letter-spacing:.13em;text-transform:uppercase;fill:var(--ink-2)}
+.vn.is-narrow .t-role{letter-spacing:.09em}
 .vn .t-core{font-family:var(--f-name);font-weight:var(--w-name);letter-spacing:-.015em;fill:var(--ink)}
 .vn .t-stub{font-family:var(--f-name);font-weight:var(--w-name);letter-spacing:-.01em}
 .vn .ico{fill:var(--ink);stroke:var(--ink)}
@@ -956,16 +957,17 @@ SITE.ready(function(){
   /* =================================================================
      1 · THE VENN
      ================================================================= */
-  /* Titles, lines, stubs and texts: SITE.venn (assets/site.js), the §9 table verbatim, shared with Mission. */
+  /* Titles, lines, stubs and texts: SITE.venn (assets/site.js), the §9 table verbatim, shared with Mission.
+     Colours: the --venn-* tokens in site.css, chosen 24 Sept 2026 (venn-studies.html, "Chosen for the site"). */
   var V=SITE.venn;
   var VENN={
     regions:[
-      {k:'s', title:V.s.title, kick:'Who holds what', role:V.s.line, ink:'var(--v-stake)', dot:'var(--v-stake)', text:V.s.text},
-      {k:'i', title:V.i.title, kick:'Who holds what', role:V.i.line, ink:'var(--v-inst)', dot:'var(--v-inst)', text:V.i.text},
-      {k:'a', title:V.a.title, kick:'Who holds what', role:V.a.line, ink:'var(--v-ai)', dot:'var(--v-ai)', text:V.a.text},
-      {k:'si', title:V.si.title, stub:V.si.stub, kick:'Where two meet', pair:['s','i'], ink:'color-mix(in oklab,var(--v-stake),var(--v-inst))', text:V.si.text},
-      {k:'sa', title:V.sa.title, stub:V.sa.stub, kick:'Where two meet', pair:['s','a'], ink:'color-mix(in oklch shorter hue,var(--v-stake),var(--v-ai))', text:V.sa.text},
-      {k:'ia', title:V.ia.title, stub:V.ia.stub, kick:'Where two meet', pair:['i','a'], ink:'color-mix(in oklab,var(--v-inst),var(--v-ai))', text:V.ia.text},
+      {k:'s', title:V.s.title, kick:'Who holds what', role:V.s.line, ink:'var(--venn-ink-s)', dot:'var(--venn-ink-s)', text:V.s.text},
+      {k:'i', title:V.i.title, kick:'Who holds what', role:V.i.line, ink:'var(--venn-ink-i)', dot:'var(--venn-ink-i)', text:V.i.text},
+      {k:'a', title:V.a.title, kick:'Who holds what', role:V.a.line, ink:'var(--venn-ink-a)', dot:'var(--venn-ink-a)', text:V.a.text},
+      {k:'si', title:V.si.title, stub:V.si.stub, kick:'Where two meet', pair:['s','i'], ink:'var(--venn-ink-si)', text:V.si.text},
+      {k:'sa', title:V.sa.title, stub:V.sa.stub, kick:'Where two meet', pair:['s','a'], ink:'var(--venn-ink-sa)', text:V.sa.text},
+      {k:'ia', title:V.ia.title, stub:V.ia.stub, kick:'Where two meet', pair:['i','a'], ink:'var(--venn-ink-ia)', text:V.ia.text},
       {k:'c', title:V.c.title, kick:'Where all three meet', role:null, ink:'var(--ink)', dot:'var(--amber)', text:V.c.text}
     ]
   };
@@ -984,6 +986,11 @@ SITE.ready(function(){
     c:'M2900 2163.75A780 780 0 0 0 3249.64 1558.13A780 780 0 0 0 2550.36 1558.13A780 780 0 0 0 2900 2163.75Z'
   };
   var VC=[2900,1883.5];          /* the centre of the three discs' bounding box */
+  /* the two fixes (venn-studies.html): each upper circle's icon, name and role start at START and move out
+     until they stay 12 px inside the other circle's rim (HOME is where the keynote drew them); the centre word
+     must fit inside the centre, whose width at height y (below its two upper corners) is centreW(y) */
+  var HOME={s:2286.31, i:3557.7}, START={s:2220, i:3582};
+  function centreW(y){var d=y-CS[1]; return 2*(Math.sqrt(Math.max(0,R*R-d*d))-(CI[0]-2900));}
   var DISCS_W=2418, DISCS_H=2303;
   /* stubs: 'wide' puts the labels beside the discs, as the keynote did; 'narrow' (phones) puts two of them underneath */
   var STUBS={
@@ -1006,7 +1013,7 @@ SITE.ready(function(){
 
   function buildVenn(){
     var layout=(vn.clientWidth||600)<460?'narrow':'wide';
-    vnState.layout=layout;
+    vnState.layout=layout; vn.classList.toggle('is-narrow',layout==='narrow');
     [].slice.call(vn.childNodes).forEach(function(n){if(n.nodeName!=='title'&&n.nodeName!=='desc')vn.removeChild(n);});
     var defs=E('defs',null,vn);
     /* the discs: 31's open washes (tint toward the centre, white toward the rim) */
@@ -1018,11 +1025,11 @@ SITE.ready(function(){
     ringGrad('vr-s',3146.5,1902.32,1795.5,1122.32,'--venn-stake-ring');
     ringGrad('vr-i',2653.5,1902.32,4004.5,1122.32,'--venn-inst-ring');
     ringGrad('vr-a',2900,1475.37,2900,3035.37,'--venn-ai-ring');
-    /* the overlaps: light passing through (SITE-BRIEF §6): each lens brightens toward the centre */
-    function lensGrad(id,x1,y1,x2,y2,a,b){var g=E('linearGradient',{id:id,gradientUnits:'userSpaceOnUse',x1:x1,y1:y1,x2:x2,y2:y2},defs);gradStops(g,[[0,'color-mix(in oklab,color-mix(in oklab,var('+a+'),var('+b+')) 60%,var(--ground))'],[1,'var(--ground)']]);}
-    lensGrad('vl-si',2900,861,2900,1600,'--venn-stake','--venn-inst');
-    lensGrad('vl-sa',2121,2209,2720,1860,'--venn-stake','--venn-ai');
-    lensGrad('vl-ia',3678,2209,3080,1860,'--venn-inst','--venn-ai');
+    /* the overlaps: light passing through (SITE-BRIEF §6): each lens brightens from its tip toward the centre */
+    function lensGrad(id,x1,y1,x2,y2,tip){var g=E('linearGradient',{id:id,gradientUnits:'userSpaceOnUse',x1:x1,y1:y1,x2:x2,y2:y2},defs);gradStops(g,[[0,'var('+tip+')'],[1,'var(--ground)']]);}
+    lensGrad('vl-si',2900,861,2900,1600,'--venn-si');
+    lensGrad('vl-sa',2121,2209,2720,1860,'--venn-sa');
+    lensGrad('vl-ia',3678,2209,3080,1860,'--venn-ia');
     var core=E('radialGradient',{id:'vc-core',gradientUnits:'userSpaceOnUse',cx:2900,cy:1780,r:560},defs);
     gradStops(core,[[0,'var(--ground)',1],[.45,'var(--ground)',1],[1,'var(--ground)',0]]);
     var f=E('filter',{id:'vc-glow',x:'-60%',y:'-60%',width:'220%',height:'220%'},defs); E('feGaussianBlur',{stdDeviation:70},f);
@@ -1039,11 +1046,12 @@ SITE.ready(function(){
     vnState.veils={};
     VENN.regions.forEach(function(r){vnState.veils[r.k]=E('path',{d:PATH[r.k],class:'veil'},art);});
 
-    /* icons and names (the keynote's own marks) */
+    /* icons and names (the keynote's own marks; one group per circle, so each icon moves with its name) */
     var ic=E('g',{class:'ico','aria-hidden':'true'},art);
-    [[2286.31,1209.69],[2353.63,1209.69],[2319.97,1267.99],[2252.65,1267.99],[2218.99,1209.69],[2252.65,1151.39],[2319.97,1151.39]].forEach(function(p){E('circle',{cx:p[0],cy:p[1],r:15.81,stroke:'none'},ic);});
-    ['M3504.66 1110.84L3469.98 1110.84L3469.98 1145.52','M3504.66 1257.72L3469.98 1257.72L3469.98 1223.04','M3610.74 1110.84L3645.42 1110.84L3645.42 1145.52','M3610.74 1257.72L3645.42 1257.72L3645.42 1223.04'].forEach(function(d){E('path',{d:d,fill:'none','stroke-width':13.77,'stroke-linecap':'square'},ic);});
-    [[2810.24,2398.67,2989.76,2398.67],[2836.53,2335.2,2963.47,2462.14],[2900,2308.91,2900,2488.43],[2963.47,2335.2,2836.53,2462.14]].forEach(function(l){E('line',{x1:l[0],y1:l[1],x2:l[2],y2:l[3],'stroke-width':13.77},ic);});
+    vnState.ico={s:E('g',null,ic), i:E('g',null,ic), a:E('g',null,ic)};
+    [[2286.31,1209.69],[2353.63,1209.69],[2319.97,1267.99],[2252.65,1267.99],[2218.99,1209.69],[2252.65,1151.39],[2319.97,1151.39]].forEach(function(p){E('circle',{cx:p[0],cy:p[1],r:15.81,stroke:'none'},vnState.ico.s);});
+    ['M3504.66 1110.84L3469.98 1110.84L3469.98 1145.52','M3504.66 1257.72L3469.98 1257.72L3469.98 1223.04','M3610.74 1110.84L3645.42 1110.84L3645.42 1145.52','M3610.74 1257.72L3645.42 1257.72L3645.42 1223.04'].forEach(function(d){E('path',{d:d,fill:'none','stroke-width':13.77,'stroke-linecap':'square'},vnState.ico.i);});
+    [[2810.24,2398.67,2989.76,2398.67],[2836.53,2335.2,2963.47,2462.14],[2900,2308.91,2900,2488.43],[2963.47,2335.2,2836.53,2462.14]].forEach(function(l){E('line',{x1:l[0],y1:l[1],x2:l[2],y2:l[3],'stroke-width':13.77},vnState.ico.a);});
 
     var labs=E('g',{'aria-hidden':'true'},art);
     vnState.names=[
@@ -1056,7 +1064,8 @@ SITE.ready(function(){
       E('text',{x:3557.7,y:1505,'text-anchor':'middle',class:'t-role'},labs,RG.i.role),
       E('text',{x:2900,y:2718,'text-anchor':'middle',class:'t-role'},labs,RG.a.role)   /* "with AI", set small under Foresight */
     ];
-    vnState.core=E('text',{x:2900,y:1805,'text-anchor':'middle',class:'t-core'},labs,RG.c.title);
+    /* the centre word: CoPlan (SITE.venn.c.word), never smaller than the circle names, fitted inside the centre */
+    vnState.core=E('text',{x:2900,y:1806,'text-anchor':'middle',class:'t-core',style:'font-kerning:normal'},labs,V.c.word||'CoPlan');
 
     /* the three stubs (leader line, a dot where it starts, the name) */
     var sg=E('g',{class:'stubs'},art); vnState.stubs={};
@@ -1093,11 +1102,15 @@ SITE.ready(function(){
     var st=vnState, layout=st.layout, box=vn.getBoundingClientRect();
     var W=box.width||600, H=(root.classList.contains('hv-on')&&layout==='wide')?(box.height||600):Infinity;
     var sc=0.18;
+    st.core.setAttribute('font-size',100); var w100=st.core.getComputedTextLength()||0;
     for(var pass=0;pass<3;pass++){
-      var fsName=clamp(19/sc,118,200), fsRole=clamp(10.6/sc,52,96), fsCore=clamp(17/sc,100,170), fsStub=clamp(layout==='narrow'?14.5/sc:15.5/sc,86,150);
+      /* on phones the names are 17 px and the roles 10 px, so CoPlan can be larger than the names and the
+         names clear the overlaps without running off their own circle */
+      var fsName=clamp((layout==='narrow'?17:19)/sc,118,200), fsRole=clamp((layout==='narrow'?10:10.6)/sc,52,96), fsStub=clamp(layout==='narrow'?14.5/sc:15.5/sc,86,150);
       st.names.forEach(function(t,i){t.setAttribute('font-size',fsName); var ry=+t.getAttribute('y')+fsName*0.3+fsRole*1.02; st.roles[i].setAttribute('y',ry.toFixed(1));});
       st.roles.forEach(function(t){t.setAttribute('font-size',fsRole);});
-      st.core.setAttribute('font-size',fsCore);
+      clearNames(st,sc);
+      fitCore(st,w100,fsName);
       Object.keys(st.stubs).forEach(function(k){
         var s=st.stubs[k], sp=s.spec, lines=s.tx.querySelectorAll('tspan'), lh=fsStub*1.08;
         s.tx.setAttribute('font-size',fsStub);
@@ -1122,6 +1135,34 @@ SITE.ready(function(){
     Object.keys(st.regs).forEach(function(k){st.regs[k].firstChild.setAttribute('stroke-width',2/sc);});
     applyVennT(st.t);
   }
+  /* the names clear of the overlaps: each upper circle's icon, name and role move out together until the name
+     and the role stay 12 screen px inside the other circle's rim, where that rim comes nearest */
+  function placeName(st,k,x){
+    var j=k==='s'?0:1;
+    st.names[j].setAttribute('x',x.toFixed(1)); st.roles[j].setAttribute('x',x.toFixed(1));
+    st.ico[k].setAttribute('transform','translate('+(x-HOME[k]).toFixed(2)+' 0)');
+  }
+  function clearNames(st,sc){
+    var m=12/sc, sh={s:0,i:0};
+    placeName(st,'s',START.s); placeName(st,'i',START.i);
+    [[0,'s',CI,-1],[1,'i',CS,1]].forEach(function(q){
+      [st.names[q[0]],st.roles[q[0]]].forEach(function(t){
+        var b=t.getBBox(), y=clamp(q[2][1],b.y,b.y+b.height), h=Math.sqrt(R*R-(y-q[2][1])*(y-q[2][1]));
+        sh[q[1]]=Math.max(sh[q[1]], q[3]<0 ? b.x+b.width-(q[2][0]-h-m) : (q[2][0]+h+m)-b.x);
+      });
+    });
+    placeName(st,'s',START.s-sh.s); placeName(st,'i',START.i+sh.i);
+  }
+  /* CoPlan: 460 units wide (500 on phones), never below 1.1 x the circle names, and never wider than the
+     centre at its baseline less 90 units; the baseline sits at 1760 + 0.33 x size */
+  function fitCore(st,w100,fsName){
+    if(!w100){ st.core.setAttribute('font-size',(1.1*fsName).toFixed(1)); return; }
+    var fs=Math.max(100*(st.layout==='narrow'?500:460)/w100, 1.1*fsName), k=0;
+    while(k<80 && fs*w100/100>centreW(1760+.33*fs)-90){ fs*=.99; k++; }
+    st.core.setAttribute('font-size',fs.toFixed(1)); st.core.setAttribute('y',(1760+.33*fs).toFixed(1));
+    st.coreFs=fs; st.nameFs=fsName;
+  }
+
   /* t: 0 = hero (the discs alone, a little larger), 1 = interactive (stubs drawn) */
   function applyVennT(t){
     var st=vnState; st.t=t; if(!st.art) return;

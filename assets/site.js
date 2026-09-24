@@ -447,7 +447,9 @@
   }
 
   /* The Venn, as Damiano chose it on 23 Sept (SITE-BRIEF §9: "Foresight, overlaps renamed").
-     One source for every page that draws it (Home hero, Mission). Verbatim; do not paraphrase. */
+     One source for every page that draws it (Home hero, Mission). Verbatim; do not paraphrase.
+     c.word is the word drawn in the centre of the diagram (24 Sept: "CoPlan, not Coplanning"); the panel,
+     the key and the labels keep c.title. Its colours are the --venn-* tokens in site.css (venn-studies.html). */
   var VENN={
     label:'Coplanning: Stakeholders, Institutions and Foresight with AI overlap; where all three meet is Coplanning.',
     s:{title:'Stakeholders', line:'hold the agency',
@@ -462,7 +464,7 @@
        text:'A resident describes a change to one photograph, sees the scenario and what it would do, and keeps it or changes their mind. We do not know what we want until we see it.'},
     ia:{title:'Checking before committing', stub:['Checking before','committing'],
        text:'Every scenario is evaluated against the institution\u2019s own policy, design guides and law as it is made, so conflicts surface while a change is still easy, long before anything is committed.'},
-    c:{title:'Coplanning', line:'where all three meet',
+    c:{title:'Coplanning', line:'where all three meet', word:'CoPlan',
        text:'One process rather than three: the institution holds the mandate and the guardrails, people bring what they know and value, and foresight turns both into scenarios everyone can see, weigh and agree on.'}
   };
 

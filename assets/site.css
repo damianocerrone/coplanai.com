@@ -58,14 +58,20 @@
   --v-stake:#8A4B00;        /* Stakeholders · hold the agency */
   --v-inst:#4F3DA5;         /* Institutions · hold the mandate */
   --v-ai:#005F8E;           /* AI agents · never hold the pen alone */
-  /* the Venn washes (31's disc gradients: inner tint → white) and rings */
-  --venn-stake:#C5AA95;  --venn-stake-ring:#B68D53;
-  --venn-inst:#A89EC0;   --venn-inst-ring:#8D82B6;
-  --venn-ai:#94AABD;     --venn-ai-ring:#2888B2;
-  /* brighter overlaps (SITE-BRIEF §6: light passing through, not ink pooling) */
-  --venn-si:#EDE4EE;        /* Stakeholders ∩ Institutions · public interest & governance */
-  --venn-sa:#E6ECEF;        /* Stakeholders ∩ AI agents · user experience & feedback */
-  --venn-ia:#E3E6F3;        /* Institutions ∩ AI agents · data & regulation */
+  /* the Venn's own colours, chosen 24 Sept 2026 (venn-studies.html, "Chosen for the site"): 2.4 Deep moss,
+     midsummer night, with Stakeholders moved to a Granny Smith green. The washes (disc gradients: inner tint
+     → white) and rings. Names 9.92 / 12.00 / 7.80:1 and roles 5.78 / 6.99 / 4.54:1 on the full washes. */
+  --venn-stake:#ABCC6E;  --venn-stake-ring:#789147;   /* Granny Smith */
+  --venn-inst:#D6CFEF;   --venn-inst-ring:#897DAF;    /* midsummer night */
+  --venn-ai:#7BB3C7;     --venn-ai-ring:#2594B4;      /* fjord */
+  /* the overlaps' lens tips, each fading to the ground (SITE-BRIEF §6: light passing through, not ink pooling) */
+  --venn-si:#EBCDAD;        /* Stakeholders ∩ Institutions · public interest & governance (pale cloudberry) */
+  --venn-sa:#BED9C5;        /* Stakeholders ∩ Foresight · seeing before choosing (the OKLab mix) */
+  --venn-ia:#C1D5EB;        /* Institutions ∩ Foresight · checking before committing (the mix, lifted) */
+  /* the Venn's text inks: names in the panel and key, and the three stubs (6.4:1 or more on white).
+     The site-wide --v-* inks above stay as they were: they also colour ticks, wedges and plates. */
+  --venn-ink-s:#4C6507;  --venn-ink-i:#635784;  --venn-ink-a:#00617F;
+  --venn-ink-si:#875301; --venn-ink-sa:#356947; --venn-ink-ia:#3D6188;
   --venn-core:#FFFFFF;      /* the centre: coplanning, a luminous white core */
   --venn-glow:rgba(255,236,196,.85);
 

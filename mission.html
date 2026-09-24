@@ -147,8 +147,9 @@
 .venn text{text-anchor:middle}
 .venn .t-name{font-family:var(--f-name);font-weight:var(--w-name);font-size:20px;letter-spacing:-.01em}
 .venn .t-role{font-family:var(--f-q);font-style:italic;font-size:14.5px}
-.venn .t-a{fill:var(--v-stake)}.venn .t-b{fill:var(--v-inst)}.venn .t-c{fill:var(--v-ai)}
-.venn .t-core{font-family:var(--f-name);font-weight:var(--w-name);font-size:16.5px;fill:var(--ink);letter-spacing:-.01em}
+.venn .t-a{fill:var(--venn-ink-s)}.venn .t-b{fill:var(--venn-ink-i)}.venn .t-c{fill:var(--venn-ink-a)}
+/* the centre word: CoPlan (SITE.venn.c.word), never smaller than the circle names (24 Sept) */
+.venn .t-core{font-family:var(--f-name);font-weight:var(--w-name);font-size:22px;fill:var(--ink);letter-spacing:-.015em}
 .venn .labels{pointer-events:none}
 .cp__cap{margin-top:10px;text-align:center}
 .vk__g + .vk__g{margin-top:26px}
@@ -164,7 +165,7 @@
 .chip--abc{background:radial-gradient(circle,var(--venn-core) 0 34%,transparent 36%),conic-gradient(var(--venn-stake-ring) 0 33.3%,var(--venn-inst-ring) 0 66.6%,var(--venn-ai-ring) 0)}
 .vk .name{font-size:clamp(19px,1.45vw,21px);line-height:1.2}
 .vk .role{margin-top:2px;font-family:var(--f-q);font-style:italic;font-size:16.5px;line-height:1.35}
-.vk .role--a{color:var(--v-stake)}.vk .role--b{color:var(--v-inst)}.vk .role--c{color:var(--v-ai)}
+.vk .role--a{color:var(--venn-ink-s)}.vk .role--b{color:var(--venn-ink-i)}.vk .role--c{color:var(--venn-ink-a)}
 .vk .small{margin-top:6px;color:var(--c-text)}
 
 /* ch04 · the framework, simplest: two axes, four tasks */
@@ -328,7 +329,7 @@
   .fw__c--l .cap,.fw__c--r .cap{padding:10px 5px 10px 4px}
   .venn .t-name{font-size:23px}
   .venn .t-role{font-size:16px}
-  .venn .t-core{font-size:18px}
+  .venn .t-core{font-size:25px}
 }
 @media (max-width:420px){
   .m-index ol{columns:1}
@@ -558,7 +559,7 @@
           <text class="t-role t-b" x="432" y="205" data-venn="i.line">hold the mandate</text>
           <text class="t-name t-c" x="280" y="424" data-venn="a.title">Foresight</text>
           <text class="t-role t-c" x="280" y="447" data-venn="a.line">with AI</text>
-          <text class="t-core" x="280" y="260" data-venn="c.title">Coplanning</text>
+          <text class="t-core" x="280" y="262" data-venn="c.word">CoPlan</text>
         </g>
       </svg>
       <figcaption class="lab cp__cap">Point at a part of the diagram, or at a line of the key</figcaption>
