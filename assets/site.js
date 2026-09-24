@@ -35,9 +35,9 @@
 
   var NAV=[
     {key:'use-cases',    href:'use-cases.html',    label:'Use cases',    gloss:'Where the work has been done'},
-    {key:'mission',      href:'mission.html',      label:'Mission',      gloss:'Why we plan together'},
     {key:'signals',      href:'signals.html',      label:'Signals',      gloss:'Media, research and news'},
     {key:'use-coplanai', href:'use-coplanai.html', label:'Use CoPlanAI', gloss:'Ways to work together'},
+    {key:'mission',      href:'mission.html',      label:'Mission',      gloss:'Why we plan together'},
     {key:'about',        href:'about.html',        label:'About',        gloss:'People, company, ethics'}
   ];
   var START=[

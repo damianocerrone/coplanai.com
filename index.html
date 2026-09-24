@@ -34,6 +34,7 @@
 .sec-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px 32px;align-items:end}
 .sec-head > .l{grid-column:1/8}
 .sec-head > .r{grid-column:8/13}
+.sec-head--full > .l{grid-column:1/-1}
 .sec-head .eyebrow + .h2{margin-top:18px}
 .ext::after{content:"\2197";display:inline-block;margin-left:.3em;font-size:.86em;color:var(--ink-3)}
 .where{display:block}
@@ -123,13 +124,10 @@
 .tri{padding-top:clamp(40px,5vw,72px)}
 .tri__h{max-width:14em}
 .lines{list-style:none;margin:clamp(48px,5.4vw,84px) 0 0;padding:0;position:relative}
-.lines::before{content:"";position:absolute;left:15px;top:14px;bottom:40px;width:1px;background:linear-gradient(to bottom,var(--rule),color-mix(in srgb,var(--amber) 60%,transparent))}
 .line{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,4.4vw,64px);padding-bottom:clamp(64px,6.8vw,112px);align-items:start}
 .line:last-child{padding-bottom:0}
 .line--wide{grid-template-columns:minmax(0,4.3fr) minmax(0,7.7fr)}
-.lt{position:relative;padding-left:58px;min-width:0}
-.ln{position:absolute;left:0;top:4px;width:31px;height:31px;border-radius:50%;background:var(--ground);box-shadow:inset 0 0 0 1.25px var(--rule);display:grid;place-items:center;font-family:var(--f-label);font-weight:var(--w-label);font-size:12px;line-height:1;letter-spacing:.04em;color:var(--ink-2)}
-.line--last .ln{background:var(--amber);box-shadow:none;color:var(--ground)}
+.lt{position:relative;min-width:0}
 .lt .say{font-size:clamp(28px,2.6vw,38px);line-height:1.14;text-wrap:balance}
 .lt .where{margin-top:20px}
 .lt .body{margin-top:8px;max-width:34em}
@@ -205,7 +203,6 @@
 @media (min-width:901px){.fw-stage{position:sticky;top:calc(var(--header-h) + 16px)}}
 .fw-fig{min-height:0}
 .fw-svg{display:block;width:100%;height:auto;overflow:visible}
-.fw-bar{display:none}
 .fw-cap{margin-top:10px;min-height:2.6em}
 .fw-step{position:relative;padding:28px 0 34px;border-top:1px solid var(--rule-soft)}
 .fw-step:first-child{border-top:0;padding-top:0}
@@ -264,20 +261,8 @@
 .fw-on .fw-stage{position:sticky;top:var(--header-h);height:calc(100vh - var(--header-h));justify-content:center;padding:14px 0 12px}
 .fw-on .fw-fig{flex:1 1 auto;display:flex;align-items:center;justify-content:center}
 .fw-on .fw-svg{height:100%;max-height:calc(100vh - var(--header-h) - 150px)}
-.fw-on .fw-bar{display:flex;align-items:center;gap:12px;padding:12px 2px 0;border-top:1px solid var(--rule-soft);margin-top:6px}
 .fw-on .fw-step:not(.is-active){opacity:.55;transition:opacity .4s}
 .fw-on .fw-step.is-active{opacity:1;transition:opacity .4s}
-.fw-bar .sb{flex:none;width:38px;height:38px;border-radius:50%;border:0;box-shadow:inset 0 0 0 1px var(--rule);background:var(--ground);color:var(--ink);font-family:var(--f-ui);font-size:17px;line-height:1;display:grid;place-items:center;padding:0}
-.fw-bar .sb:hover:not(:disabled){box-shadow:inset 0 0 0 1px var(--ink)}
-.fw-bar .sb:disabled{opacity:.35;cursor:default}
-.fw-bar .sb:focus-visible{border-radius:50%}
-.fw-bar .sb-l{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.fw-bar .sb-l b{color:var(--amber);margin-right:8px}
-.sb-ticks{display:flex;gap:2px;list-style:none;margin:0;padding:0}
-.sb-ticks button{width:22px;height:26px;border:0;background:transparent;display:grid;place-items:center;cursor:pointer;padding:0;border-radius:6px}
-.sb-ticks button::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--rule);transition:background-color .25s,transform .25s}
-.sb-ticks button.done::before{background:var(--ink-4)}
-.sb-ticks button[aria-current="step"]::before{background:var(--amber);transform:scale(1.45)}
 
 /* =====================================================================
    4 · Where we have worked: the map (assets/map.js)
@@ -427,9 +412,6 @@ a.signal:hover .signal__title .arr{color:var(--amber);transform:translate(2px,-2
 }
 @media (max-width:900px){
   .line{grid-template-columns:minmax(0,1fr);gap:22px}
-  .lines::before{display:none}
-  .lt{padding-left:0}
-  .ln{position:static;margin-bottom:14px}
   .line--has-also{gap:0}
   .line--has-also .lt{display:contents}
   .line--has-also .lm{order:1;margin-top:22px}
@@ -442,9 +424,7 @@ a.signal:hover .signal__title .arr{color:var(--amber);transform:translate(2px,-2
   .fw-on .fw-stage-col{position:sticky;top:var(--header-h);z-index:5;height:46vh;min-height:300px;background:var(--ground);margin:0 calc(-1 * var(--gut));padding:0 var(--gut);border-bottom:1px solid var(--rule-soft)}
   .fw-on .fw-stage{position:relative;top:auto;height:100%;padding:8px 0 6px}
   .fw-on .fw-svg{max-height:none}
-  .fw-on .fw-bar{padding-top:6px;margin-top:2px}
   .fw-on .fw-cap{display:none}
-  .fw-on .sb-ticks{display:none}
   .fw-on .fw-step{min-height:62vh;padding:28px 0 30px;scroll-margin-top:calc(var(--header-h) + 46vh + 8px)}
   .fw-on .fw-step:first-child{min-height:40vh}
   .fw-on .fw-step:last-child{min-height:50vh}
@@ -553,14 +533,12 @@ a.signal:hover .signal__title .arr{color:var(--amber);transform:translate(2px,-2
      ===================================================================== -->
 <section class="section tri" id="principle" aria-labelledby="pr-h">
   <div class="wrap">
-    <p class="eyebrow">The principle</p>
-    <h2 class="display tri__h" id="pr-h" style="margin-top:18px">Images let us <em>try</em> our ideas.</h2>
+    <h2 class="sr" id="pr-h">Images let us try our ideas</h2>
 
     <ol class="lines">
       <!-- 1 · Vienna: evaluate ideas and scenarios -->
       <li class="line">
         <div class="lt">
-          <span class="ln" aria-hidden="true">1</span>
           <p class="say">Collaborative planning is the opportunity to evaluate ideas and scenarios,</p>
           <p class="lab where">Vienna · Supergrätzl · 2026</p>
           <p class="body">The same street corner, as it is and as a scenario, with trees and planting where cars were parked. For the Supergrätzl, residents weighed generated images of their own streets: printed, pegged to a line and marked with dots.</p>
@@ -586,7 +564,6 @@ a.signal:hover .signal__title .arr{color:var(--amber);transform:translate(2px,-2
       <!-- 2 · the impact evaluator -->
       <li class="line line--wide">
         <div class="lt">
-          <span class="ln" aria-hidden="true">2</span>
           <p class="say">understand their impact,</p>
           <p class="lab where">The impact evaluator · on the platform</p>
           <p class="body">A street corner with parklets tried on it, and beside it the evaluation: what the change would do, who gains and who loses.</p>
@@ -618,7 +595,6 @@ a.signal:hover .signal__title .arr{color:var(--amber);transform:translate(2px,-2
       <!-- 3 · Munich (+ Kaarina): take an informed decision -->
       <li class="line line--has-also">
         <div class="lt">
-          <span class="ln" aria-hidden="true">3</span>
           <p class="say">take an informed decision</p>
           <p class="lab where">Munich · Zamanand festival · 2024</p>
           <p class="body">Visitors put more than 3,000 ideas for a car-free space around the Siegestor into images; about 300 votes chose one, and it was built there as a walkable prototype four months later. A vote is as informed as what people can see when they cast it.</p>
@@ -654,7 +630,6 @@ a.signal:hover .signal__title .arr{color:var(--amber);transform:translate(2px,-2
       <!-- 4 · TICO, Bologna: education and democratic collaboration -->
       <li class="line line--last">
         <div class="lt">
-          <span class="ln" aria-hidden="true">4</span>
           <p class="say"><em>— and even change your choice.</em></p>
           <p class="lab where">Bologna · TICO – Officina mobile della conoscenza · 2026</p>
           <p class="body">TICO is the City of Bologna’s workshop truck. It travels through the city’s neighbourhoods, from Borgo Panigale-Reno to Savena, and ours is one station in it. Pupils, families and neighbours try an idea on a real street, see what it would change, and talk it through with whoever is standing next to them.</p>
@@ -688,12 +663,11 @@ a.signal:hover .signal__title .arr{color:var(--amber);transform:translate(2px,-2
      ===================================================================== -->
 <section class="fw wash-commons" id="framework" aria-labelledby="fw-h">
   <div class="wrap">
-    <div class="sec-head">
+    <div class="sec-head sec-head--full">
       <div class="l">
         <p class="eyebrow">The engagement framework · how we work</p>
-        <h2 class="h2" id="fw-h">Before anyone is invited, ask how much is <em>already decided</em>.</h2>
+        <h2 class="h2" id="fw-h">The four tasks of <em>coplanning</em>.</h2>
       </div>
-      <p class="body r">Two questions decide what an invitation can achieve, before a single person walks into the room. Together they make four tasks. Each asks people something different, and needs something different from the institution that asks.</p>
     </div>
   </div>
 
@@ -707,13 +681,7 @@ a.signal:hover .signal__title .arr{color:var(--amber);transform:translate(2px,-2
               <desc id="fw-desc">Two axes, open brief to defined brief and respond to propose, make four tasks: scenario planning top left, futuring top right, design review bottom left, co-design bottom right. Each disc is one engagement.</desc>
             </svg>
           </div>
-          <div class="fw-bar">
-            <button class="sb" type="button" id="sb-prev" aria-label="Previous step">←</button>
-            <p class="lab sb-l" id="sb-label"><b>00</b>Two questions</p>
-            <ol class="sb-ticks" id="sb-ticks" aria-label="Steps"></ol>
-            <button class="sb" type="button" id="sb-next" aria-label="Next step">→</button>
-          </div>
-          <figcaption class="small fw-cap" id="fw-figcap">The engagement framework, built from our work since <span data-m="reach.since">2021</span>.</figcaption>
+          <figcaption class="sr fw-cap" id="fw-figcap">The engagement framework, built from our work since <span data-m="reach.since">2021</span>.</figcaption>
           <p class="sr" id="fw-live" aria-live="polite"></p>
         </figure>
       </div>
@@ -806,12 +774,11 @@ a.signal:hover .signal__title .arr{color:var(--amber);transform:translate(2px,-2
      ===================================================================== -->
 <section class="section where-s" id="where" aria-labelledby="map-h">
   <div class="wrap">
-    <div class="sec-head">
+    <div class="sec-head sec-head--full">
       <div class="l">
         <p class="eyebrow">Where we have worked</p>
         <h2 class="h2" id="map-h">Everything we know was learned <em>somewhere</em>.</h2>
       </div>
-      <p class="body r">Since <span data-m="reach.since">2021</span> we have helped cities, ministries and the people who live in them try an idea on a real place before anyone commits to it: a shoreline, a market square, a school ground, a station forecourt.</p>
     </div>
 
     <figure class="map-fig" aria-labelledby="map-cap">
@@ -915,105 +882,7 @@ a.signal:hover .signal__title .arr{color:var(--amber);transform:translate(2px,-2
     </ol>
 
     <!-- step 4 in detail: institutional change (the stages group the eight steps of use-coplanai.html#governance) -->
-    <section class="plate plate--violet gt" id="gt" aria-labelledby="gt-h">
-      <div class="gt__main">
-        <p class="lab gt__k"><span>Step 4 in detail</span><span class="st-bar" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i></span><span>Governance Transformation</span></p>
-        <h3 class="h2 gt__h" id="gt-h">Build the mandate <em>before the pilot.</em></h3>
-        <p class="lede">Collaborative planning leaves the one-off workshop and becomes part of how the institution works. Together we redesign its processes, governance model and culture, so that what people imagine reaches the moments where decisions are made.</p>
-        <ul class="ticks">
-          <li><b>Where the public enters.</b> We map the decisions where people should come in, while the options are still open.</li>
-          <li><b>Across departments.</b> Teams inside the institution work on the same scenarios and evaluations as the public.</li>
-          <li><b>Accountability.</b> Governance and data practice that stand up to public scrutiny.</li>
-        </ul>
-        <p class="small gt__for">For governments, cities and international organisations. We stay on as a partner while the practice becomes standard.</p>
-      </div>
-      <div class="gt__plan">
-        <span class="lab">How it runs</span>
-        <ol class="gt-stages">
-          <li class="gt-stage">
-            <span class="gt-when"><span class="lab">Months 1–3</span><span class="gt-track" aria-hidden="true"><i style="--s:1;--e:3"></i></span></span>
-            <div class="gt-what"><h4 class="name">Read how you decide</h4><p>A joint audit of how you engage, inside and out; where collaborative planning can matter most; a bootcamp in which staff try the tools and reshape them.</p></div>
-          </li>
-          <li class="gt-stage">
-            <span class="gt-when"><span class="lab">Months 3–4</span><span class="gt-track" aria-hidden="true"><i style="--s:3;--e:4"></i></span></span>
-            <div class="gt-what"><h4 class="name">Redesign the process</h4><p>A blueprint for the new way of working, drawn up together, before anything is piloted.</p></div>
-          </li>
-          <li class="gt-stage">
-            <span class="gt-when"><span class="lab">Months 4–10</span><span class="gt-track" aria-hidden="true"><i style="--s:4;--e:10"></i></span></span>
-            <div class="gt-what"><h4 class="name">Build, pilot, roll out</h4><p>A dedicated instance built to put the blueprint to work; training and pilots in real conditions; then rollout across the organisation, with us alongside as advisers.</p></div>
-          </li>
-          <li class="gt-stage">
-            <span class="gt-when"><span class="lab">Months 10–12</span><span class="gt-track" aria-hidden="true"><i style="--s:10;--e:12"></i></span></span>
-            <div class="gt-what"><h4 class="name">Measure and hand over</h4><p>The impact is measured, and you take full ownership.</p></div>
-          </li>
-        </ol>
-        <p class="small gt__note">The partnership runs for 3 to 12 months. The change around it can take longer.</p>
-        <p class="gt__go"><a class="link link--arrow" href="use-coplanai.html#governance">Governance Transformation, month by month</a></p>
-      </div>
-    </section>
-
-    <div class="equip">
-      <p class="lab">The equipment</p>
-      <p class="body"><b>CoPlan Studio</b> runs the session. <b>The Configurator</b> holds the brief, the themes and the guardrails. <b>The participant app</b> is what a resident touches: a photograph of their own place, their own words, and a picture back.</p>
-    </div>
-    <div class="equip">
-      <p class="lab">Safeguards</p>
-      <p class="body">The AI generates and evaluates; people make every decision. The client owns every output. GDPR applies, facial features are neither collected nor analysed, the cloud is European, and under the EU AI Act the platform is a limited-risk decision-support tool.</p>
-    </div>
     <p class="work-go"><a class="link link--arrow" href="use-coplanai.html">Ways to work together, and the platform</a></p>
-  </div>
-</section>
-
-<!-- =====================================================================
-     8 · WHERE THE METHOD COMES FROM (R1.10: Sampo Ruoppila's paper. Published 16 Sept 2026, open
-     access: Ruoppila, S. and Anastasiou, K. (2026) Urban Research & Practice, 1–27,
-     doi:10.1080/17535069.2026.2730986; compact here, the full reference is on Mission)
-     ===================================================================== -->
-<section class="section section--flush-top" id="research" aria-labelledby="research-h">
-  <div class="wrap">
-    <div class="research hair hair-pad">
-      <div class="lead">
-        <p class="eyebrow">Research</p>
-        <h2 class="h3" id="research-h">Where the method comes from.</h2>
-        <p class="body">It sits in the Scandinavian participatory-design tradition, in which tacit skill is shared by exercising it rather than by describing it. Our research reads our own engagements against the literature on planning, participation and generative AI.</p>
-        <p class="cite">
-          <span class="lab">Further reading</span>
-          <cite class="cite__t"><a href="https://doi.org/10.1080/17535069.2026.2730986" target="_blank" rel="noopener">Participating with AI: how generative visualisations are changing participatory planning<span class="sr"> (opens in a new tab)</span></a></cite>
-          <span class="cite__a">Sampo Ruoppila and Konsta Anastasiou</span>
-          <span class="cite__s"><i>Urban Research &amp; Practice</i>, 2026 · open access</span>
-        </p>
-        <div class="actions">
-          <a class="link link--arrow" href="mission.html">Read the mission</a>
-          <a class="link" href="about.html">About us</a>
-        </div>
-      </div>
-      <div class="people">
-        <div class="person">
-          <h3 class="name">Sampo Ruoppila</h3>
-          <p class="lab">Co-founder · research and policy lead</p>
-          <p class="small">PhD and docent in urban studies. Professor of Practice, University of Vaasa; senior researcher, University of Helsinki.</p>
-        </div>
-        <div class="person">
-          <h3 class="name">Damiano Cerrone</h3>
-          <p class="lab">Co-founder · product design and innovation lead</p>
-          <p class="small">Doctoral dissertation on collaborative planning with generative AI, 2026.</p>
-        </div>
-      </div>
-      <div class="shelf">
-        <p class="lab">Reading that shaped the method</p>
-        <ul>
-          <li><span class="lab">Ostrom, 1990</span><span class="b">Governing the Commons</span></li>
-          <li><span class="lab">Mulgan, 2017</span><span class="b">Big Mind</span></li>
-          <li><span class="lab">Sennett, 2018</span><span class="b">Building and Dwelling</span></li>
-          <li><span class="lab">Lévy, 1997</span><span class="b">Collective Intelligence</span></li>
-          <li><span class="lab">McCullough, 2013</span><span class="b">Ambient Commons</span></li>
-          <li><span class="lab">Rushkoff, 2019</span><span class="b">Team Human</span></li>
-          <li><span class="lab">Koestler, 1964</span><span class="b">The Act of Creation</span></li>
-          <li><span class="lab">Ehn, 1988</span><span class="b">Work-Oriented Design of Computer Artifacts</span></li>
-          <li class="span"><span class="lab"><span class="nw">Arnstein, 1969 ·</span> <span class="nw">Healey, 1997 ·</span> <span class="nw">Innes &amp; Booher, 2010</span></span></li>
-        </ul>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1531,10 +1400,7 @@ SITE.ready(function(){
 
     /* ---------- the steps ---------- */
     var steps=[].slice.call(doc.querySelectorAll('.fw-step'));
-    var sbPrev=doc.getElementById('sb-prev'), sbNext=doc.getElementById('sb-next'), sbLabel=doc.getElementById('sb-label'), sbTicks=doc.getElementById('sb-ticks');
     var cap=doc.getElementById('fw-figcap'), live=doc.getElementById('fw-live');
-    for(var i=1;i<=LAST;i++){var li=doc.createElement('li'),b=doc.createElement('button');b.type='button';b.setAttribute('data-go',i);b.setAttribute('aria-label','Step '+i+': '+TITLES[i]);li.appendChild(b);sbTicks.appendChild(li);}
-    var ticks=[].slice.call(sbTicks.querySelectorAll('button'));
     function pad2(n){return (n<10?'0':'')+n;}
     function caption(n){
       var since=(D.reach&&D.reach.since)||2021;
@@ -1552,9 +1418,6 @@ SITE.ready(function(){
       var changed=n!==state.step; state={step:n};
       svg.querySelectorAll('[data-show]').forEach(function(e){e.classList.toggle('on',inRange(e.getAttribute('data-show'),n));});
       steps.forEach(function(a){a.classList.toggle('is-active',+a.getAttribute('data-step')===n);});
-      sbLabel.innerHTML='<b>'+pad2(n)+'</b>'+esc(TITLES[n]);
-      sbPrev.disabled=n<=0; sbNext.disabled=n>=LAST;
-      ticks.forEach(function(b,i){var k=i+1; b.classList.toggle('done',k<n); if(k===n) b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');});
       cap.innerHTML=caption(n);
       if(changed&&n>0&&root.classList.contains('fw-on')) live.textContent='Figure, step '+n+' of '+LAST+': '+TITLES[n]+'.';
       roving();
@@ -1575,9 +1438,6 @@ SITE.ready(function(){
       el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
       if('onscrollend' in window){addEventListener('scrollend',unlock,{once:true}); lockT=setTimeout(unlock,1600);} else lockT=setTimeout(unlock,reduce?60:900);
     }
-    sbPrev.addEventListener('click',function(){go(state.step-1);});
-    sbNext.addEventListener('click',function(){go(state.step+1);});
-    ticks.forEach(function(b){b.addEventListener('click',function(){go(+b.getAttribute('data-go'));});});
     addEventListener('scroll',throttleRAF(compute),{passive:true});
 
     /* step texts bound to the data */
@@ -1628,8 +1488,7 @@ SITE.ready(function(){
     /* key: the task colours the discs use (derived from the four poles) */
     var TC=M.taskColours();
     doc.getElementById('map-key').innerHTML=['imagine','test','shape','improve'].map(function(k){return '<span><i class="sw" style="background:'+TC.mark[k]+'"></i>'+esc(TC.labels[k])+'</span>';}).join('')+
-      '<span><i class="sw" style="background:'+TC.mark.none+'"></i>'+esc(TC.labels.none)+'</span>'+
-      '<span class="sz"><i style="width:7px;height:7px"></i><i style="width:10px;height:10px"></i><i style="width:15px;height:15px"></i>1 · 3 · 10 engagements</span>';
+      '<span><i class="sw" style="background:'+TC.mark.none+'"></i>'+esc(TC.labels.none)+'</span>';
     /* draw when the section comes near, so the hero stays light */
     var drawn=false;
     function drawOnce(){ if(drawn) return; drawn=true; render(); }
