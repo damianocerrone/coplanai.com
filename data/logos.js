@@ -465,6 +465,15 @@ window.COPLAN_LOGOS = [
   "note": "Standard logo (2025 archive copy). The live site currently shows a temporary 50-year anniversary version."
  },
  {
+  "name": "Bolt",
+  "slug": "bolt",
+  "file": "img/logos/bolt.svg",
+  "source_url": "https://commons.wikimedia.org/wiki/File:Bolt_Technology_Logo_2019.svg",
+  "kind": "client",
+  "country": "Estonia",
+  "ratio": 1.69
+ },
+ {
   "name": "Esri Italy",
   "slug": "esri-italia",
   "file": "img/logos/esri-italia.svg",
