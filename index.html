@@ -300,18 +300,24 @@
 /* the five ways (Working with us): B3 "Five drawings", one card per way, exactly as colour 6
    "Five quiet hues" (work-b3-study.html #b3-colour-6): B3's own we/you drawings in each card's hues,
    with their three-part key above the cards. On wide screens the five cards share one subgrid, so
-   every row (step, name, mode, words, facts) lines up across them whatever wraps. The invitation
-   below is the one that invites.
+   every row (step, name, mode, words, facts) lines up across them whatever wraps. Fill 2 "Deeper foot"
+   (five-ways-fills-study.html #v2): What changes sits on a deeper shade of its card's hue
+   (--wk-deep = color-mix(in oklab, ground, we-fill 42%), fixed as hex), and the card carries the
+   Venn studies' still grain: a zero-mean noise tile, overlay, .247 (95 % of .26) at 0.5 px.
+   The invitation below is the one that invites.
    Every selector sits under #work; the five hues are local to this section, not site tokens.
-   Inks on their grounds 6.1:1 or more (hover grounds included); labels and --ink-2 7:1 or more. */
+   Inks on their grounds 6.1:1 or more (hover grounds included), 5.9:1 on the deeper foot; labels and --ink-2 7:1 or more. */
 #work .wk-list{list-style:none;margin:clamp(28px,3vw,40px) 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
 #work .wk-c{position:relative;display:flex;flex-direction:column;gap:8px;min-width:0;padding:20px 20px 20px;border-radius:18px;background:var(--wk-gnd);transition:background-color .2s}
-#work .wk-c:nth-child(1){--wk-gnd:#EDF6EB;--wk-gndh:#E6F1E4;--wk-ink:#3E5F37;--wk-bar0:#C6D5C3;--wk-rl:#CAD8C7;--wk-wef:#CAE1C5;--wk-lens:#96B191}
-#work .wk-c:nth-child(2){--wk-gnd:#E8F7F1;--wk-gndh:#E0F2EB;--wk-ink:#1D6350;--wk-bar0:#BBD6CE;--wk-rl:#BFD9D1;--wk-wef:#BCE3D6;--wk-lens:#85B4A5}
-#work .wk-c:nth-child(3){--wk-gnd:#E6F6F8;--wk-gndh:#DEF2F4;--wk-ink:#076169;--wk-bar0:#B5D5D9;--wk-rl:#B9D8DB;--wk-wef:#B7E2E7;--wk-lens:#7FB3B9}
-#work .wk-c:nth-child(4){--wk-gnd:#E9F5FD;--wk-gndh:#E1F0FA;--wk-ink:#275B7A;--wk-bar0:#BED3E0;--wk-rl:#C2D6E3;--wk-wef:#BEDEF4;--wk-lens:#88AEC8}
-#work .wk-c:nth-child(5){--wk-gnd:#EDF3FF;--wk-gndh:#E6EEFC;--wk-ink:#3E557F;--wk-bar0:#C6D0E3;--wk-rl:#CAD3E5;--wk-wef:#C9DAF8;--wk-lens:#96A9CC}
+#work .wk-c:nth-child(1){--wk-gnd:#EDF6EB;--wk-gndh:#E6F1E4;--wk-ink:#3E5F37;--wk-bar0:#C6D5C3;--wk-rl:#CAD8C7;--wk-wef:#CAE1C5;--wk-lens:#96B191;--wk-deep:#DEEDDB}
+#work .wk-c:nth-child(2){--wk-gnd:#E8F7F1;--wk-gndh:#E0F2EB;--wk-ink:#1D6350;--wk-bar0:#BBD6CE;--wk-rl:#BFD9D1;--wk-wef:#BCE3D6;--wk-lens:#85B4A5;--wk-deep:#D6EFE6}
+#work .wk-c:nth-child(3){--wk-gnd:#E6F6F8;--wk-gndh:#DEF2F4;--wk-ink:#076169;--wk-bar0:#B5D5D9;--wk-rl:#B9D8DB;--wk-wef:#B7E2E7;--wk-lens:#7FB3B9;--wk-deep:#D2EEF1}
+#work .wk-c:nth-child(4){--wk-gnd:#E9F5FD;--wk-gndh:#E1F0FA;--wk-ink:#275B7A;--wk-bar0:#BED3E0;--wk-rl:#C2D6E3;--wk-wef:#BEDEF4;--wk-lens:#88AEC8;--wk-deep:#D7EBF9}
+#work .wk-c:nth-child(5){--wk-gnd:#EDF3FF;--wk-gndh:#E6EEFC;--wk-ink:#3E557F;--wk-bar0:#C6D0E3;--wk-rl:#CAD3E5;--wk-wef:#C9DAF8;--wk-lens:#96A9CC;--wk-deep:#DEE8FC}
 #work .wk-c:hover{background:var(--wk-gndh)}
+#work .wk-c{isolation:isolate}
+#work .wk-c::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:url(assets/grain-256.png) 0 0/128px 128px;mix-blend-mode:overlay;opacity:.247}
+#work .wk-c::before{z-index:-1;pointer-events:none;background:var(--wk-deep)}
 /* a rule of its own: a browser without :has() would drop the whole selector list, hover included */
 #work .wk-c:has(.wk-name a:focus-visible){background:var(--wk-gndh)}
 #work .wk-legend{display:flex;flex-wrap:wrap;align-items:center;gap:8px 26px;margin:clamp(28px,3vw,40px) 0 0;font-family:var(--f-label);font-weight:var(--w-label);font-size:var(--fs-label);line-height:1.4;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-label)}
@@ -360,7 +366,15 @@
   @supports (grid-template-rows:subgrid){
     #work .wk-list{row-gap:0}
     #work .wk-c{display:grid;grid-row:span 7;grid-template-rows:subgrid;row-gap:8px}
-    #work .wk-foot{margin:0}
+    #work .wk-c > *{grid-column:1}
+    #work .wk-g{grid-row:1}
+    #work .wk-no{grid-row:2}
+    #work .wk-name{grid-row:3}
+    #work .wk-mode{grid-row:4}
+    #work .wk-d{grid-row:5}
+    #work .wk-foot{grid-row:6;margin:0;border-top-color:transparent}
+    #work .wk-go{grid-row:7}
+    #work .wk-c::before{content:"";grid-column:1;grid-row:6/8;margin:0 -20px -20px;border-radius:0 0 18px 18px}
   }
 }
 /* one column of rows: pictogram, then the words, then the two facts in a ruled column */
@@ -373,13 +387,15 @@
   #work .wk-mode{grid-area:mode}
   #work .wk-d{grid-area:d;max-width:34em}
   #work .wk-go{grid-area:go}
-  #work .wk-foot{grid-area:foot;align-content:start;align-self:stretch;margin:0;padding:2px 0 0 18px;border-top:0;border-left:1px solid var(--wk-rl)}
+  #work .wk-foot{grid-area:foot;align-content:start;align-self:stretch;margin:0;padding:2px 0 0 18px;border-top:0;border-left:1px solid transparent}
+  #work .wk-c::before{content:"";grid-area:foot;align-self:stretch;margin:-20px -24px -20px 0;border-radius:0 18px 18px 0}
 }
 /* phone: pictogram on top, then the words; the two facts side by side */
 @media (max-width:640px){
   #work .wk-c{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"g g" "no no" "name name" "mode mode" "d d" "foot foot" "go go";grid-template-rows:none;row-gap:6px;padding:18px 20px 20px}
   #work .wk-g{max-width:250px;margin:0 0 6px;justify-self:start}
-  #work .wk-foot{grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin-top:8px;padding:12px 0 0;border-left:0;border-top:1px solid var(--wk-rl)}
+  #work .wk-foot{grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin-top:8px;padding:12px 0 0;border-left:0;border-top:0}
+  #work .wk-c::before{grid-column:1/-1;grid-row:6/8;margin:0 -20px -20px;border-radius:0 0 18px 18px}
 }
 @media (prefers-reduced-motion:reduce){
   #work .wk-c,#work .wk-name a,#work .wk-go::after{transition:none}
