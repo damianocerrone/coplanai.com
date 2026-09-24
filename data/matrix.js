@@ -608,6 +608,17 @@ var D = {
    "note": "2026-09-24: absorbed 2023-ai-in-the-hood-eindhoven (Damiano merged the two records, as in the ledger). Title = the ledger's, without the retired name. Place from the ledger brief: Buurthuis de Buut, Rochusbuurt, Eindhoven."
   },
   {
+   "slug": "2025-lulea-subscription",
+   "title": "Luleå University of Technology: children's workshop, 2025",
+   "year": 2025,
+   "place": "Luleå, Sweden",
+   "task": "imagine",
+   "mandate": false,
+   "image": null,
+   "status": "confirmed",
+   "note": "Damiano, 24 Sept 2026: a children's workshop the university ran in 2025, Futuring; not a subscription. Separate from 2026-lulea (19 Jan 2026). The slug keeps the ledger's identity."
+  },
+  {
    "slug": "2023-lulea-youth",
    "title": "Lulea University: Participatory AI methods for youth engagement",
    "year": 2023,
