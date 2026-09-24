@@ -605,7 +605,9 @@
   /* keynote frame: the keynote's own angle / leader length / anchor, in its 5800px units */
   var CALLOUTS = {
     keynote: { unit: 'k', list: [['Finland', -116, 330, 'r'], ['Estonia', -40, 360, 'l'], ['Germany', 198, 430, 'r'], ['Italy', 150, 560, 'r'],
-      ['United Arab Emirates', 24, 400, 'l'], ['Georgia', -108, -150, 'r'], ['Indonesia', -28, 330, 'r']] },
+      ['United Arab Emirates', 24, 400, 'l'], ['Georgia', -40, 200, 'l'], ['Indonesia', -28, 330, 'r']] },
+    /* Georgia (24 Sept 2026): the label sits north-east of the Caucasus, clear of the Türkiye and Levant discs
+       at both map widths (Home ~1310 px, Use cases ~860 px); it used to hang south-west over Beirut and Athens */
     world: { unit: 'k', list: [['Finland', -64, 330, 'l'], ['Germany', 200, 420, 'r'], ['Italy', 152, 500, 'r'], ['Georgia', -24, 470, 'l'],
       ['United Arab Emirates', 26, 380, 'l'], ['Indonesia', 22, 340, 'l']] },
     europe: { unit: 'u', list: [['Finland', -28, 70, 'l'], ['Estonia', 12, 96, 'l'], ['Germany', -58, 92, 'l'], ['Netherlands', -122, 118, 'r'],

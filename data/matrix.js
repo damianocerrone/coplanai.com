@@ -6,14 +6,14 @@ var D = {
  "meta": {
   "updated": "2026-09-24",
   "source": "Portfolio OS ledger.json (2026-09-21) · mandate-table.json (Damiano, 2026-09-20) · Mandate Matrix kit",
-  "note": "Baseline = the 63 cases shown in the keynote (Damiano, 2026-09-20). Merged 2026-09-22: 9 proposed additions and 1 proposed re-tag from the use cases added 2026-09-21 and a completeness sweep, all status \"provisional\" until Damiano confirms. See data/MATRIX-REFRESH.md. 2026-09-24 (Damiano): the two Eindhoven 'AI in the Hood' records merged into 2023-humankind-workshops (as in the ledger); 2025-seventh-hill-sessions (Ann Arbor) removed from the site; 2023-undp-kosovo-children-codesign kept after an evidence check."
+  "note": "Baseline = the 63 cases shown in the keynote (Damiano, 2026-09-20). Merged 2026-09-22: 9 proposed additions and 1 proposed re-tag from the use cases added 2026-09-21 and a completeness sweep, all status \"provisional\" until Damiano confirms. See data/MATRIX-REFRESH.md. 2026-09-24 (Damiano): the two Eindhoven 'AI in the Hood' records merged into 2023-humankind-workshops (as in the ledger); 2025-seventh-hill-sessions (Ann Arbor) removed from the site; 2023-undp-kosovo-children-codesign kept after an evidence check. 2026-09-24 (Q&A on the grey map points): 13 cases added (2 provisional: the Mayors for Economic Growth workshops in Kutaisi and Chișinău); 2024-undp-m4eg hidden (the programme is an Innovation project); Batumi forum -> Scenario planning; 2023-pristina-cluster -> Co-design, Blloku 1 only; public titles without arrangement words (Humankind, Karlsruhe, YPO, Tampere); the Heilbronn exhibition placed in Heilbronn; GIZ placed in Cairo at the source. See the change plan (qa-change-plan.md). Review the same day: images without children's faces for ACE (a copy of the tablet photo with the old address bar blurred) and the Tallinn museum (the exhibition room)."
  },
  "reach": {
-  "engagements": 100,
-  "cities": 76,
-  "countries": 39,
+  "engagements": 93,
+  "cities": 73,
+  "countries": 38,
   "since": 2021,
-  "note": "From the keynote client map as regenerated 21 Sept 2026 23:16 (WORKING/map/src totals.json, cities.json, countries.json: 107 · 79 · 39), with the site's corrections of 24 Sept 2026 (map-data/build_web_data.py SITE_REMOVED / SITE_MOVED / SITE_ADDED): Ann Arbor removed (-1 engagement, -1 city); the merged 'AI in the Hood' workshop placed in Eindhoven, where it was held, not under the client's Amsterdam (-1 city). Added (SITE_ADDED): the KS workshop in Gjerdrum, Norway, 2026, on the framework but never on the keynote map (+1 engagement, +1 city, +1 country). Removed the same day: six subscription rows with no known use (Helsinki private client, Sitowise, Hakaniemi, Momentum, Luleå 2025, the GIZ subscription row; Budapest and Bonn leave the map, and Hungary with Budapest) and the Häme region row, the same engagement as the Harviala workshop (-7 engagements, -2 cities, -1 country). canon.yml still says 85 / 27."
+  "note": "From the keynote client map as regenerated 21 Sept 2026 23:16 (WORKING/map/src totals.json, cities.json, countries.json: 107 · 79 · 39), with the site's corrections of 24 Sept 2026 (map-data/build_web_data.py SITE_REMOVED / SITE_MOVED / SITE_ADDED): Ann Arbor removed (-1 engagement, -1 city); the merged 'AI in the Hood' workshop placed in Eindhoven, where it was held, not under the client's Amsterdam (-1 city). Added (SITE_ADDED): the KS workshop in Gjerdrum, Norway, 2026, on the framework but never on the keynote map (+1 engagement, +1 city, +1 country). Removed the same day: six subscription rows with no known use (Helsinki private client, Sitowise, Hakaniemi, Momentum, Luleå 2025, the GIZ subscription row; Budapest and Bonn leave the map, and Hungary with Budapest) and the Häme region row, the same engagement as the Harviala workshop (-7 engagements, -2 cities, -1 country). canon.yml still says 85 / 27. 24 Sept 2026, Q&A: removed 3 rows that are not CoPlanAI (BiodenCITY, EDITUA, Deep Carbon Shift) and 3 duplicates (BIWE = MUST Festival, Milano Cadorna = Rogoredo, UrbanizeHub = New Urban Habits) (-6 engagements; Poznań and Barcelona leave the map, Poland and Spain stay); BREKO (Dream Machine) placed in Berlin, not the pseudo-city 'Germany'; the Heilbronn exhibition moved from Berlin to Heilbronn (a new city) (-2 cities net). The Mayors for Economic Growth row stays one engagement drawn in three cities (Kutaisi, Chișinău, Istanbul). Totals printed by map-data/build_web_data.py: 94 · 74 · 39. Later on 24 Sept 2026: Istanbul unplaced (no session there; Türkiye leaves the map) and CityScape 2050, Cairo removed (not recognised by Damiano): 93 · 73 · 38."
  },
  "axes": {
   "vertical": {
@@ -133,7 +133,7 @@ var D = {
    "2026-vienna",
    "2024-zamanand-munich",
    "2023-helsinki-market-squares",
-   "2023-pristina-cluster"
+   "2023-tallinn-ministry-liivalaia"
   ]
  },
  "cases": [
@@ -196,7 +196,7 @@ var D = {
    "place": "Hämeenlinna, Finland",
    "task": "imagine",
    "mandate": false,
-   "image": "img/cases/2023-ace-children-playgrounds-to-planning.jpg",
+   "image": "img/cases/2023-ace-children-playgrounds-to-planning--hands.jpg",
    "status": "confirmed"
   },
   {
@@ -261,13 +261,14 @@ var D = {
   },
   {
    "slug": "2023-undp-batumi",
-   "title": "Codesign the future-fit of your city, Batumi",
+   "title": "Future-Fit Cities Forum, Batumi",
    "year": 2023,
    "place": "Batumi, Georgia",
-   "task": "imagine",
+   "task": "test",
    "mandate": false,
    "image": "img/cases/2023-undp-batumi.jpg",
-   "status": "confirmed"
+   "status": "confirmed",
+   "note": "24 Sept 2026 (Q&A): Futuring -> Scenario planning. Title moved here from assets/site.js CASE_TITLES."
   },
   {
    "slug": "2024-civitas-athens",
@@ -306,9 +307,10 @@ var D = {
    "place": "Dusheti, Georgia",
    "task": "shape",
    "mandate": true,
-   "image": "img/cases/2024-undp-m4eg.jpg",
+   "image": null,
    "status": "provisional",
-   "note": "Proposed move Futuring → Co-design (its only participatory run, Dusheti 2024); mandate yes as ruled 2026-09-20 · needs Damiano"
+   "hidden": true,
+   "hidden_note": "The programme is an Innovation project, off the framework (Damiano, Q&A 24 Sept 2026). Its workshops are their own cases: 2024-undp-m4eg-kutaisi, 2024-undp-m4eg-chisinau. Image removed: the Chisinau market photo shows young children."
   },
   {
    "slug": "2024-turku-university-nusantara",
@@ -332,23 +334,25 @@ var D = {
   },
   {
    "slug": "2024-ypo-keynote",
-   "title": "YPO keynote and workshop",
+   "title": "YPO Greater Europe",
    "year": 2024,
    "place": "Tallinn, Estonia",
    "task": "imagine",
    "mandate": false,
    "image": null,
-   "status": "confirmed"
+   "status": "confirmed",
+   "note": "24 Sept 2026: title without the arrangement (ledger client ypo-greater-europe-chapter)."
   },
   {
    "slug": "2024-museum-fur-werte",
-   "title": "Museum für Werte, Berlin",
+   "title": "Learn How To Change, Heilbronn",
    "year": 2024,
-   "place": "Berlin, Germany",
+   "place": "Heilbronn, Germany",
    "task": "imagine",
    "mandate": false,
    "image": "img/cases/2024-museum-fur-werte.jpg",
-   "status": "confirmed"
+   "status": "confirmed",
+   "note": "24 Sept 2026: the exhibition was in Heilbronn (Sales 2024 row 46; the museum's own page), not Berlin, the client's address. Dream Machine for BREKO is a separate engagement (2024-mfw-breko-tagung)."
   },
   {
    "slug": "2025-berlin-kiezlabor",
@@ -432,14 +436,14 @@ var D = {
   },
   {
    "slug": "2023-pristina-cluster",
-   "title": "Pristina: Children, Festivals and Blloku 1",
+   "title": "Blloku 1, Pristina",
    "year": 2023,
    "place": "Pristina, Kosovo",
-   "task": "improve",
+   "task": "shape",
    "mandate": true,
    "image": "img/cases/2023-pristina-cluster.jpg",
    "status": "confirmed",
-   "note": "Now stands for Blloku 1 and the architecture festival; the children strand is its own proposed Co-design dot"
+   "note": "Stands for Blloku 1 only from 24 Sept 2026 (Q&A: Co-design; was Design review). The architecture festival is its own case (2023-kosovo-architecture-foundation-lina-workshop); the children strand is 2023-undp-kosovo-children-codesign. mandate true kept (ruling of 20 Sept)."
   },
   {
    "slug": "2024-zamanand-munich",
@@ -543,13 +547,14 @@ var D = {
   },
   {
    "slug": "2024-karlsruhe-private-subscription",
-   "title": "Private client, Karlsruhe",
+   "title": "Karlsruhe",
    "year": 2024,
    "place": "Karlsruhe, Germany",
    "task": "shape",
    "mandate": false,
    "image": null,
-   "status": "confirmed"
+   "status": "confirmed",
+   "note": "24 Sept 2026: 'Private client' named the arrangement; no project name is recorded."
   },
   {
    "slug": "2024-rail4cities-rogoredo",
@@ -619,7 +624,7 @@ var D = {
    "place": "Tallinn, Estonia",
    "task": "test",
    "mandate": false,
-   "image": "img/cases/2023-tallinn-biodiverse-city-museum.jpg",
+   "image": "img/pool/2023-tallinn-biodiverse-city-museum--room.jpg",
    "status": "confirmed"
   },
   {
@@ -644,23 +649,25 @@ var D = {
   },
   {
    "slug": "2024-humankind-rotterdam",
-   "title": "Humankind Rotterdam workshops and subscription",
+   "title": "Humankind, Rotterdam",
    "year": 2024,
-   "place": "Netherlands",
+   "place": "Rotterdam, Netherlands",
    "task": "test",
    "mandate": false,
    "image": null,
-   "status": "confirmed"
+   "status": "confirmed",
+   "note": "24 Sept 2026: title without the arrangement; place moved here from assets/site.js CASE_PLACES."
   },
   {
    "slug": "2024-must-turku",
-   "title": "MUST: Enabling multi-species transition",
+   "title": "MUST Festival, Turku",
    "year": 2024,
    "place": "Turku, Finland",
    "task": "test",
    "mandate": false,
    "image": "img/cases/2024-must-turku.jpg",
-   "status": "confirmed"
+   "status": "confirmed",
+   "note": "24 Sept 2026: retitled from the grant's name (MUST: Enabling multi-species transition). One engagement with the 30 May 2024 Turku capture; the keynote's BIWE row is the same engagement and leaves the map (Q2 default)."
   },
   {
    "slug": "2024-paces-stockholm",
@@ -726,23 +733,25 @@ var D = {
   },
   {
    "slug": "2026-conwa-tuni",
-   "title": "ConWa: Contested Waterfront Transformation",
+   "title": "Waterfront research, Tampere",
    "year": 2026,
    "place": "Tampere, Finland",
    "task": "test",
    "mandate": true,
    "image": null,
-   "status": "confirmed"
+   "status": "confirmed",
+   "note": "24 Sept 2026: neutral title until the project name is cleared for publication (see reference/case-fact-pack.md); moved here from assets/site.js CASE_TITLES."
   },
   {
    "slug": "2026-giz",
    "title": "GIZ Connective Cities: visualising green corridors, Cairo to Berlin",
    "year": 2026,
-   "place": "Manila, Philippines",
+   "place": "Cairo, Egypt",
    "task": "test",
    "mandate": false,
    "image": "img/cases/2026-giz.jpg",
-   "status": "confirmed"
+   "status": "confirmed",
+   "note": "24 Sept 2026: place Cairo (Q&A lists Cairo first), moved here from assets/site.js CASE_PLACES / MOVE_TO. On the map it colours every city of the keynote's 2026-giz-workshop row (map-data/build_web_data.py SITE_CASES)."
   },
   {
    "slug": "2026-bologna",
@@ -874,6 +883,149 @@ var D = {
    "image": null,
    "status": "provisional",
    "note": "Found by the completeness sweep, 2026-09-22 · needs Damiano"
+  },
+  {
+   "slug": "2024-undp-m4eg-kutaisi",
+   "title": "Mayors for Economic Growth, Kutaisi",
+   "year": 2024,
+   "place": "Kutaisi, Georgia",
+   "task": "test",
+   "mandate": false,
+   "image": "img/cases/2024-undp-m4eg-kutaisi.jpg",
+   "status": "provisional",
+   "note": "Split from 2024-undp-m4eg (Damiano, 24 Sept 2026: its places are workshops). Sales 2024 row 7; M4EG Georgia Report 2024 KH18: workshop for 40 municipalities, 24-25 Apr 2024. Task by analogy with the Batumi forum (Damiano: test). Damiano, 24 Sept 2026: it was the April workshop; the task stays provisional until he confirms it. Photo: UNDP/Vladimir Valishvili (UNDP Georgia, 29 Apr 2024)."
+  },
+  {
+   "slug": "2024-undp-m4eg-chisinau",
+   "title": "Mayors for Economic Growth, Chișinău",
+   "year": 2024,
+   "place": "Chișinău, Moldova",
+   "task": "test",
+   "mandate": false,
+   "image": "img/cases/2024-undp-m4eg-chisinau.jpg",
+   "status": "provisional",
+   "note": "Split from 2024-undp-m4eg. Sales 2024 row 39; five site photos uploaded 5 Jul 2024 (03_Project files/starting_photos_moldova); PO revision of 9 Aug 2024 names a UNDP Moldova delivery contact. Task by analogy (test), provisional. Image: the central market entrance, AI-generated (Damiano, 24 Sept 2026)."
+  },
+  {
+   "slug": "2023-gotech-world-conference",
+   "title": "GoTech World, Bucharest",
+   "year": 2023,
+   "place": "Bucharest, Romania",
+   "task": "imagine",
+   "mandate": false,
+   "image": null,
+   "status": "confirmed",
+   "note": "Q&A 24 Sept 2026: Futuring. GoTech World, Romexpo, 8-9 Nov 2023 (ledger brief); the session itself is not independently confirmed."
+  },
+  {
+   "slug": "2023-kosovo-architecture-foundation-lina-workshop",
+   "title": "Kosovo Architecture Festival, Pristina",
+   "year": 2023,
+   "place": "Pristina, Kosovo",
+   "task": "imagine",
+   "mandate": false,
+   "image": null,
+   "status": "confirmed",
+   "note": "Q&A: Futuring. Lecture (7 Jul 2023) and festival workshop (QA). Split out of 2023-pristina-cluster, which now stands for Blloku 1."
+  },
+  {
+   "slug": "2023-urban-futures-conference",
+   "title": "Urban Future, Stuttgart",
+   "year": 2023,
+   "place": "Stuttgart, Germany",
+   "task": "imagine",
+   "mandate": false,
+   "image": null,
+   "status": "confirmed",
+   "note": "Q&A: Futuring. Urban Future 2023, 21-23 June (QA). Keynote slug used: the ledger slug carries the retired name."
+  },
+  {
+   "slug": "2024-hal-aarhus",
+   "title": "Urban Testbeds Jr, Aarhus",
+   "year": 2024,
+   "place": "Aarhus, Denmark",
+   "task": "imagine",
+   "mandate": false,
+   "image": null,
+   "status": "confirmed",
+   "note": "Q&A: Futuring. 18 Apr 2024, 40 pupils aged 9-12, Skødstrup Skole; the Hamburg-Aarhus-Luleå project, whose Hamburg case is 'Urban Testbeds Jr, Hamburg' (QA; site.js CASE_TITLES)."
+  },
+  {
+   "slug": "2024-dubai-park-codesign-workshop",
+   "title": "Nad Al Hamar 3 Park, Dubai",
+   "year": 2024,
+   "place": "Dubai, United Arab Emirates",
+   "task": "shape",
+   "mandate": false,
+   "image": "img/pool/2024-urbanist-dubai--resident-session.jpg",
+   "status": "confirmed",
+   "note": "Q&A: Co-design. 15 Jul 2024, 20+ residents in two focus groups (FACTS.md l.16 of the Dubai record). A use of the Dubai Urban Design Platform (ledger 2024-urbanist-dubai, an Innovation project)."
+  },
+  {
+   "slug": "2024-mfw-breko-tagung",
+   "title": "Dream Machine, Museum für Werte",
+   "year": 2024,
+   "place": "Berlin, Germany",
+   "task": "imagine",
+   "mandate": false,
+   "image": null,
+   "status": "confirmed",
+   "note": "Q&A: Futuring. Museum für Werte for BREKO, Nov 2024 (Sales 2024 row 47; ui_exports dated 20 Nov 2024). A museum exhibition, not a conference (Damiano, 24 Sept 2026). Place: Q3 (default Berlin). No image yet: the generated scenario's starting photo has no licence (city map meanwhile)."
+  },
+  {
+   "slug": "2024-publictwin-rotterdam",
+   "title": "Dijk Park, Rotterdam Zuid",
+   "year": 2024,
+   "place": "Rotterdam, Netherlands",
+   "task": "test",
+   "mandate": false,
+   "image": null,
+   "status": "confirmed",
+   "note": "Q&A: Scenario planning. Fly-through videos rendered 23 Sept 2024 for PublicTwin's online model of Mecanoo's Dijk Park vision (QA). The videos are Street View derivatives: never published (ledger clearance)."
+  },
+  {
+   "slug": "2024-taltech-training",
+   "title": "TalTech Campus Entrance, Tallinn",
+   "year": 2024,
+   "place": "Tallinn, Estonia",
+   "task": "shape",
+   "mandate": false,
+   "image": "img/cases/2024-taltech-training.jpg",
+   "status": "confirmed",
+   "note": "Q&A: Co-design. 23 May 2024 campus-entrance workshop (ledger brief). Live page coplanai.com/portfolio/taltech-campus/."
+  },
+  {
+   "slug": "2024-undp-ternopil",
+   "title": "Go Green Ternopil",
+   "year": 2024,
+   "place": "Ternopil, Ukraine",
+   "task": "shape",
+   "mandate": false,
+   "image": null,
+   "status": "confirmed",
+   "note": "Q&A: Co-design. 25 Nov 2024, opening of the Ternopil EcoHub (QA; the record calls it a presentation)."
+  },
+  {
+   "slug": "2023-humankind-zaandam",
+   "title": "Good Public Space Analysis, Zaandam",
+   "year": 2024,
+   "place": "Zaandam, Netherlands",
+   "task": "shape",
+   "mandate": false,
+   "image": null,
+   "status": "confirmed",
+   "note": "Q&A: Co-design. 24 Apr 2024, Wijkcentrum de Poelenburcht, the public space around the Spaghettiflat (hunt-2026-09-21.md l.27-32). The slug keeps the keynote's 2023."
+  },
+  {
+   "slug": "2025-undp-georgia-europe-day",
+   "title": "Europe Day: Artificial Intelligence Hour, Expo Georgia",
+   "year": 2025,
+   "place": "Tbilisi, Georgia",
+   "task": "imagine",
+   "mandate": false,
+   "image": null,
+   "status": "confirmed",
+   "note": "Q&A: Futuring. 9 May 2025, run by a UNDP staff member; no one from SPIN Unit was there (ledger brief)."
   }
  ]
 };

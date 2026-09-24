@@ -395,34 +395,32 @@
     '2023-humankind-workshops':'\u2018AI in the Hood\u2019 closing workshop, Humankind',
     '2024-paces-stockholm':'PACES Stockholm',
     '2026-bologna':'TICO \u2013 Officina mobile della conoscenza, Bologna',
-    '2026-conwa-tuni':'Research subscription, Tampere',  /* counted, not named until cleared for publication */
     /* moved here from use-cases.html (QA, 24 Sept) so the Home framework and map tooltips agree:
        the title of the case's own live page where the ledger title reads badly */
     '2026-wuf-2026':'Affordable housing and informal settlement upgrading, WUF13 Baku',  /* the one Baku entry (R3.4) */
-    '2023-undp-batumi':'Future-Fit Cities Forum, Batumi',
     '2024-hamburg-hal':'Urban Testbeds Jr, Hamburg',
     '2024-oman-planning-event':'Humanising Cities, Oman',
     '2023-vantaa':'Havukoski Futures, Vantaa',
     '2025-oulu':'Oulu Centre Vision 2040'
   };
   var CASE_PLACES={
-    '2026-giz':'Cairo, Egypt',
     '2026-norway':'Gjerdrum, Norway',
     '2023-ace-children-playgrounds-to-planning':'H\u00e4meenlinna, Finland',
     '2024-kyiv-school-of-economics-lviv':'Kyiv, Ukraine',
     'ai-based-visualisation-for-sustainable-and-affordable-housing':'Online',  /* the January 2026 workshop: no Manila participants */
     '2024-turku-university-nusantara':'East Kalimantan (Nusantara), Indonesia',
-    '2024-humankind-rotterdam':'Rotterdam, Netherlands',
     '2024-oman-planning-event':'Muscat, Oman',
     '2025-new-urban-habits-festival':'Bucharest, Romania'
   };
-  /* data/places.js (generated) still files the online workshop and the Cairo cohort under Manila. Drop and
-     move them once, for every map, then recolour any city whose list changed. Hidden records (duplicates,
+  /* data/places.js (generated) still files the online workshop under Manila. Drop it once, for every map,
+     then recolour any city whose list changed. Hidden records (duplicates,
      merged or removed cases) are left out at build time since 24 Sept (map-data/build_web_data.py, which
      also takes Ann Arbor off the map and puts the merged 'AI in the Hood' workshop in Eindhoven); the
      hidden filter below stays as a safety net. */
   var OFF_MAP={'ai-based-visualisation-for-sustainable-and-affordable-housing':1};
-  var MOVE_TO={'2026-giz':'Cairo'};
+  /* empty since 24 Sept (Q&A): 2026-giz is placed in Cairo in data/matrix.js, and the map build colours every
+     city of the GIZ cohort with it (map-data/build_web_data.py SITE_CASES); moving it here would undo that */
+  var MOVE_TO={};
   var fixed=false;
   function fixCases(){
     var C=window.COPLAN; if(fixed||!C||!C.data||!C.data.cases) return;

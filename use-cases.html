@@ -252,6 +252,8 @@ a.uc-row:hover .uc-row__t{color:var(--amber)}
   .uc-item + .uc-item{border-top:1px solid var(--rule-soft)}
   .uc-card{display:grid;grid-template-columns:92px minmax(0,1fr);grid-template-rows:auto 1fr;gap:0 16px;align-items:start;padding:16px 0}
   .uc-card .card__media{grid-column:1;grid-row:1/span 2;aspect-ratio:1/1;border-radius:10px}
+  /* a city map prints its label bottom-left and keeps its dot left of x = 2/3: align the square crop left so both survive */
+  .uc-card .uc-mapimg img{object-position:0 50%}
   .uc-card__b{grid-column:2;grid-row:1}
   .uc-card .card__meta{margin-top:0}
   .uc-card .card__title{margin-top:6px;font-size:18.5px}
@@ -282,7 +284,7 @@ a.uc-row:hover .uc-row__t{color:var(--amber)}
   <div class="uc-head__main">
     <p class="eyebrow">Use cases</p>
     <h1 class="display" id="h1">Where ideas have been <em>tried</em>.</h1>
-    <p class="lede">This catalogue holds <b data-m="total">69</b> of our <b data-m="reach.engagements">100</b> engagements. Each ran one of four tasks. The task depends on two things: how much was already decided, and whether people brought their own ideas or responded to material they were given. Where a case has its own page, its card opens it.</p>
+    <p class="lede">This catalogue holds <b data-m="total">81</b> of our <b data-m="reach.engagements">93</b> engagements. Each ran one of four tasks. The task depends on two things: how much was already decided, and whether people brought their own ideas or responded to material they were given. Where a case has its own page, its card opens it.</p>
     <div class="actions">
       <a class="link" href="#map">See the map</a>
     </div>
@@ -290,9 +292,9 @@ a.uc-row:hover .uc-row__t{color:var(--amber)}
   <div class="uc-figs">
     <p class="eyebrow" id="figs-h">Our work since <span data-m="reach.since">2021</span></p>
     <dl aria-labelledby="figs-h">
-      <div><dt class="lab">Engagements</dt><dd class="num num--s" data-m="reach.engagements">100</dd></div>
-      <div><dt class="lab">Cities</dt><dd class="num num--s" data-m="reach.cities">76</dd></div>
-      <div><dt class="lab">Countries</dt><dd class="num num--s" data-m="reach.countries">39</dd></div>
+      <div><dt class="lab">Engagements</dt><dd class="num num--s" data-m="reach.engagements">93</dd></div>
+      <div><dt class="lab">Cities</dt><dd class="num num--s" data-m="reach.cities">73</dd></div>
+      <div><dt class="lab">Countries</dt><dd class="num num--s" data-m="reach.countries">38</dd></div>
     </dl>
   </div>
 </section>
@@ -342,7 +344,7 @@ a.uc-row:hover .uc-row__t{color:var(--amber)}
       <!-- results: how to show them, then the cards -->
       <div class="uc-results">
         <div class="uc-bar">
-          <p class="uc-count" id="uc-count" aria-live="polite" aria-atomic="true">All <b data-m="total">69</b> engagements</p>
+          <p class="uc-count" id="uc-count" aria-live="polite" aria-atomic="true">All <b data-m="total">81</b> engagements</p>
           <div class="uc-bar__ctl" id="uc-ctl">
             <fieldset class="uc-seg">
               <legend class="sr">Order</legend>
@@ -367,10 +369,9 @@ a.uc-row:hover .uc-row__t{color:var(--amber)}
             <p class="small">Written up on the live site, not yet in this catalogue.</p>
             <ul>
               <li><a class="link link--ext" href="https://coplanai.com/portfolio/humanizing-digital-twins/" target="_blank" rel="noopener">Humanizing Digital Twins, Estonia<span class="sr"> (opens in a new tab)</span></a></li>
-              <li><a class="link link--ext" href="https://coplanai.com/portfolio/forum-virium-helsinki/" target="_blank" rel="noopener">Forum Virium Helsinki training<span class="sr"> (opens in a new tab)</span></a></li>
-              <li><a class="link link--ext" href="https://coplanai.com/portfolio/taltech-campus/" target="_blank" rel="noopener">TalTech campus entrance, Tallinn<span class="sr"> (opens in a new tab)</span></a></li>
+              <li><a class="link link--ext" href="https://coplanai.com/portfolio/forum-virium-helsinki/" target="_blank" rel="noopener">Forum Virium Helsinki<span class="sr"> (opens in a new tab)</span></a></li>
               <li><a class="link link--ext" href="https://coplanai.com/portfolio/wiesbaden-child-friendly/" target="_blank" rel="noopener">Child-friendly neighbourhoods, Wiesbaden<span class="sr"> (opens in a new tab)</span></a></li>
-              <li><a class="link link--ext" href="https://coplanai.com/portfolio/dubai-municipality-sustainability/" target="_blank" rel="noopener">Dubai Municipality: from pilot to a way of working<span class="sr"> (opens in a new tab)</span></a></li>
+              <li><a class="link link--ext" href="https://coplanai.com/portfolio/dubai-municipality-sustainability/" target="_blank" rel="noopener">Dubai Municipality: coplanning integration and innovation programme<span class="sr"> (opens in a new tab)</span></a></li>
             </ul>
           </div>
           <div aria-labelledby="images-h">
@@ -390,7 +391,7 @@ a.uc-row:hover .uc-row__t{color:var(--amber)}
       <div class="uc-map-text">
         <p class="eyebrow">The map</p>
         <h2 class="h2" id="map-h">Where we have <em>worked</em>.</h2>
-        <p class="body">The map shows all <b data-m="reach.engagements">100</b> engagements, city by city. Each disc is sized by how often we have worked there and coloured by the task we ran there most.</p>
+        <p class="body">The map shows all <b data-m="reach.engagements">93</b> engagements, city by city. Each disc is sized by how often we have worked there and coloured by the task we ran there most.</p>
         <div class="legend uc-legend" id="uc-legend" role="group" aria-label="Map key"></div>
       </div>
       <figure class="uc-map-fig">
@@ -468,14 +469,13 @@ SITE.ready(function(){
     '2023-undp-batumi':'With UNDP, municipalities from Georgia and Moldova brought seven sites, from squares to an old circus, to a hands-on session.',
     '2024-civitas-athens':'A hands-on workshop for the municipal network at the second CIVINET Greece–Cyprus Forum.',
     '2024-kyiv-school-of-economics-lviv':'At a Kyiv School of Economics event, five war-affected municipalities brought measured sites (parks, squares, a commemoration alley) to co-design their reconstruction.',
-    '2024-undp-m4eg':'Training and a platform trial let UNDP’s Mayors for Economic Growth network run scenario work on its own.',
     '2024-oman-planning-event':'In a capacity-building workshop led by Humankind, governors from Oman’s regions redesigned selected public spaces.',
     '2026-lulea':'Schoolchildren photographed real streets around Luleå and reimagined them; the workshop started a PhD on bringing children into mobility planning.',
     '2023-avalinn-tallinn':'Installed for the City of Tallinn’s ongoing co-design work.',
     '2023-east-cleveland-connect':'With the design consultancy Seventh Hill, residents saw their ideas for the neighbourhood’s streets and public spaces as images, on the spot.',
     '2023-helsinki-market-squares':'Voting posters at seven market squares asked passers-by what each square could hold in future.',
     '2023-tallinn-ministry-liivalaia':'After a short training, three City of Tallinn planners ran their own stakeholder pilot on four sections of Liivalaia, a central artery.',
-    '2023-pristina-cluster':'Festival workshops with the Kosovo Architecture Foundation, and residents shaping the regeneration of the Blloku 1 neighbourhood.',
+    '2023-pristina-cluster':'Residents of Blloku 1 shaped the redesign of their block’s yards, parking and playgrounds, choosing between before-and-after options on photos of their own streets.',
     '2024-zamanand-munich':'Visitors put more than 3,000 ideas for a car-free space around the Siegestor into images; about 300 votes chose one, built there as a walkable prototype four months later.',
     '2024-unimi-milan-workshop':'With students of the University of Milan.',
     '2026-vienna':'Every image carried the city’s own label: „KI-generiertes Beispielbild, kein Planungs-Rendering“, an AI-generated example image, not a planning rendering.',
@@ -497,7 +497,20 @@ SITE.ready(function(){
     '2026-giz':'Scenarios for GIZ’s year-long Green Corridors peer-learning cohort of municipal practitioners from Germany, North Africa and the Middle East.',
     '2026-bologna':'The City of Bologna’s workshop truck, touring its neighbourhoods; ours is one station in it.',
     '2026-wuf-2026':'A session with GIZ Connective Cities at the World Urban Forum in Baku, and a kiosk with a workspace for each of seven partner locations, from Huye to Hebron.',
-    'ai-based-visualisation-for-sustainable-and-affordable-housing':'An online peer-learning workshop with GIZ Connective Cities in January 2026, with practitioners from cities in Africa, the Middle East and Berlin.'
+    'ai-based-visualisation-for-sustainable-and-affordable-housing':'An online peer-learning workshop with GIZ Connective Cities in January 2026, with practitioners from cities in Africa, the Middle East and Berlin.',
+    /* added 24 Sept 2026 (Q&A on the grey map points), only where a record describes the session. None yet for
+       GoTech World, Urban Future, Go Green Ternopil or the two Mayors for Economic Growth workshops (Kutaisi waits
+       on Q1a), nor for the MUST Festival (its line carries a claim still to verify, Q2) */
+    '2023-kosovo-architecture-foundation-lina-workshop':'At the Kosovo Architecture Festival, architecture students and residents pictured Pristina’s central public spaces with more nature, against heat and the loss of biodiversity.',
+    '2024-hal-aarhus':'Forty pupils aged 9 to 12 at Skødstrup Skole rethought the spaces children use.',
+    '2024-dubai-park-codesign-workshop':'Residents in two focus groups designed Nad Al Hamar 3 park on the Dubai Urban Design Platform.',
+    '2024-taltech-training':'University staff chose what the car park in front of TalTech’s main entrance should and should not become, and turned their choices into eight scenarios.',
+    '2024-mfw-breko-tagung':'Made with Museum für Werte for BREKO, the German broadband association: visitors chose a sector, from mobility to farming, picked a regenerative, connected or innovative future, saw the photo change and could print it as a postcard.',
+    '2024-museum-fur-werte':'A station in Museum für Werte’s exhibition Learn How To Change in Heilbronn: visitors picked a place on a map of the city, pictured it changed and liked each other’s ideas.',
+    '2023-humankind-zaandam':'With Humankind’s Good Public Space Analysis, professionals pictured the public space around the Spaghettiflat, a 1960s block in Poelenburg due for demolition.',
+    '2024-publictwin-rotterdam':'Fly-through videos let residents see the street changes in Mecanoo’s Dijk Park vision for Rotterdam Zuid.',
+    '2024-undp-m4eg-kutaisi':'With UNDP, officials from Georgian municipalities worked on public spaces from their own towns.',
+    '2025-undp-georgia-europe-day':'At UNDP’s Artificial Intelligence Hour at Expo Georgia, visitors reimagined an urban space.'
   };
 
   /* Our own images: the curated pool (larger, chosen per case) or the framework thumbnail.
@@ -505,7 +518,9 @@ SITE.ready(function(){
      null = no usable photograph of our own (then data/case-images.js may supply one). */
   var IMG={
     '2021-jyvaskyla-recenter':['img/pool/2021-jyvaskyla-recenter--table.jpg','People around a table under woven pendant lamps, working through printed material.'],
-    '2023-ace-children-playgrounds-to-planning':['img/cases/2023-ace-children-playgrounds-to-planning.jpg','A school class at work: children at their desks, a projected screen at the front.'],
+    /* not the class photo (children's faces, 24 Sept 2026): hands on a tablet, filed under this case in data/collage-images.js;
+       a 1200 px copy of img/collage/hands--tablets.jpg with the tablet's address bar and logo blurred (the retired domain) */
+    '2023-ace-children-playgrounds-to-planning':['img/cases/2023-ace-children-playgrounds-to-planning--hands.jpg','Hands around a tablet on a white table, one pointing at the screen.'],
     '2023-avalinn-tallinn':['img/cases/2023-avalinn-tallinn.jpg','A session in a room with a wide projected street scene, people seated at tables.'],
     '2023-berlin-kiezlabor':['img/cases/2023-berlin-kiezlabor.jpg','A tree-lined Berlin street with parked cars, a bus and bicycles.'],
     '2023-dinnomo-zurich':['img/pool/2023-dinnomo-zurich--riverbank-park.jpg','A paved riverbank in Zurich as a generated park with lawn, path and benches.'],
@@ -523,15 +538,18 @@ SITE.ready(function(){
     '2023-undp-skopje':['img/cases/2023-undp-skopje.jpg','A busy crossroads in Skopje seen from above.','50% 62%'],
     '2023-vantaa':['img/pool/2023-vantaa--courtyard.jpg','A generated green path between apartment blocks in Havukoski, a child walking.'],
     '2024-giz-manila':['img/pool/2024-giz-manila--street.jpg','A generated Manila street with benches, a drinking fountain, lighting and a mural.'],
+    /* the Dubai photo is filed under the platform record, not the Nad Al Hamar 3 workshop: the alt says what it shows, no more */
+    '2024-dubai-park-codesign-workshop':['img/pool/2024-urbanist-dubai--resident-session.jpg','People at round tables in a participatory design session in Dubai, a facilitator speaking beside a screen.'],
     '2024-hamburg-hal':['img/cases/2024-hamburg-hal.jpg','An open, unpaved plot beside a street, trees and houses behind.'],
+    '2024-undp-m4eg-chisinau':['img/cases/2024-undp-m4eg-chisinau.jpg','The entrance of Chișinău’s central market under a green sign, stalls and umbrellas, people walking in: an AI-generated image.'],
     '2024-kyiv-school-of-economics-lviv':['img/cases/2024-kyiv-school-of-economics-lviv.jpg','A small park with a monument, paths and benches, the trees still bare.'],
     '2024-museum-fur-werte':['img/cases/2024-museum-fur-werte.jpg','A dark exhibition table lit by a single lamp.','50% 55%'],
+    /* the park photo, not the festival's map-kiosk photo, until Damiano says which part of the festival used the platform (Q2) */
     '2024-must-turku':['img/cases/2024-must-turku.jpg','A park path forking between lawns and trees in central Turku.'],
     '2024-sweco-kaarina':['img/pool/2024-sweco-kaarina--square-vision.jpg','A generated scenario of Kaarina market square: pergola, paving, planting and children on a bench.'],
+    '2024-taltech-training':['img/cases/2024-taltech-training.jpg','The car park and forecourt in front of TalTech’s main building, flags by the entrance.'],
     '2024-turku-university-nusantara':['img/pool/2024-turku-university-nusantara--laptop.jpg','Participants gathered around a laptop, one pointing at the screen.'],
     '2024-twente-climate-blue-green':['img/cases/2024-twente-climate-blue-green.jpg','Hands arranging coloured cards and printed images on a workshop table.'],
-    /* the framework dot is the Dusheti workshop; our only photo is Chișinău's market (its sign is legible): the Dusheti map instead */
-    '2024-undp-m4eg':null,
     '2024-undp-panama-betania':['img/pool/2024-undp-panama-betania--coast-nature.jpg','A generated scenario of Panama City’s coastline as a nature-based repair: green shoreline, wetlands and parks.'],
     '2024-zamanand-munich':['img/pool/2024-zamanand-munich--prototype.jpg','The walkable prototype built at the Siegestor: planters, a timber deck and people walking through.','50% 62%'],
     '2025-berlin-kiezlabor':['img/pool/2025-berlin-kiezlabor--truck.jpg','The Kiezlabor container being lifted onto a truck, ready to tour Berlin’s districts.'],
@@ -547,15 +565,15 @@ SITE.ready(function(){
   /* Images generated in the work carry a quiet "Scenario" tag (the Vienna rule: say what an image is). */
   var SCEN={'2023-dinnomo-zurich':'Scenario','2023-tallinn-ministry-liivalaia':'Scenario','2023-vantaa':'Scenario',
     '2024-giz-manila':'Scenario','2024-sweco-kaarina':'Scenario','2024-undp-panama-betania':'Scenario','2026-lulea':'Scenario',
-    '2026-norway':'Scenario','2026-vienna':'Scenario','2026-wiesbaden':'Scenario',
+    '2026-norway':'Scenario','2024-undp-m4eg-chisinau':'Scenario','2026-vienna':'Scenario','2026-wiesbaden':'Scenario',
     'ai-based-visualisation-for-sustainable-and-affordable-housing':'Scenario','2026-wuf-2026':'Photo and scenario'};
 
   /* Audience: engagements whose own record documents work with children or young people.
-     Deliberately narrow: fact pack (ACE, Luleå 2023 and 2026, Hamburg, Pristina children),
+     Deliberately narrow: fact pack (ACE, Luleå 2023 and 2026, Hamburg, Pristina children), Aarhus (pupils aged 9–12, QA),
      FACT-AUDIT §7.6 (Panama), the live Milano Digital Week page, the ICLEI title, TICO's school classes. */
   var KIDS={'2023-ace-children-playgrounds-to-planning':1,'2026-lulea':1,'2023-lulea-youth':1,'2024-hamburg-hal':1,
     '2024-undp-panama-betania':1,'2024-undp-panama-utp-intergenerational':1,'2023-undp-kosovo-children-codesign':1,
-    '2025-iclei-youth-codesign-workshop':1,'2023-milan-design-week':1,'2026-bologna':1};
+    '2025-iclei-youth-codesign-workshop':1,'2023-milan-design-week':1,'2026-bologna':1,'2024-hal-aarhus':1};
 
   /* ------------------------------------------------------------------ the cases */
   var QK={}; C.data.quadrants.forEach(function(q){QK[q.key]=q;});
