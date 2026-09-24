@@ -29,6 +29,12 @@
 .ab-open__title .display{max-width:11em}
 .ab-open__lede{grid-column:8/13;padding-bottom:8px}
 .ab-open__lede .lede{margin-top:0}
+/* the opening collage: the grid as masonry (collage-study.html, option 01), one flat image; three columns below 600 px */
+.ab-collage{margin:clamp(40px,4.4vw,64px) 0 0}
+.ab-collage img{display:block;width:100%;height:auto;border-radius:var(--r-img);background:var(--field)}
+.ab-collage figcaption{margin-top:12px;font-size:14px;line-height:1.45;color:var(--ink-4);max-width:none}
+.ab-collage__s{display:none}
+@media (max-width:599px){ .ab-collage__w{display:none} .ab-collage__s{display:inline} }   /* the phone image has its own twelve photographs */
 .ab-also{margin-top:16px;font-size:calc(var(--fs-text) - 1.5px);line-height:1.55;color:var(--ink-3);max-width:34em}
 .ab-open__lede .stats{margin-top:28px}
 
@@ -237,6 +243,13 @@
       <p class="stats"><span><b data-m="reach.engagements">106</b> engagements</span><span><b data-m="reach.cities">77</b> cities</span><span><b data-m="reach.countries">39</b> countries</span><span>since <b data-m="reach.since">2021</b></span></p>
     </div>
   </div>
+  <figure class="ab-collage">
+    <picture>
+      <source media="(max-width: 599px)" srcset="img/collage/option-1-phone.jpg" width="1080" height="1350">
+      <img src="img/collage/option-1.jpg" width="2400" height="1050" decoding="async" fetchpriority="high" alt="A collage of workshop photographs. Group photos: participants in Kyiv holding a Ukrainian flag, and groups in Nusantara and Manila. Around them, people at work: hands on a tablet, residents at touchscreens in Bologna, residents at a laptop in East Cleveland, printed scenarios on a wall in Pristina, and boards and plans on workshop tables.">
+    </picture>
+    <figcaption><span class="ab-collage__w">Workshops in Kyiv, Nusantara, Manila, Bologna, East Cleveland, Pristina, Turku, Kaarina, Dubai and Vienna. Vienna photograph: Urban Innovation Vienna.</span><span class="ab-collage__s">Workshops in Kyiv, Nusantara, Manila, Bologna, East Cleveland, Pristina and Turku.</span></figcaption>
+  </figure>
 </section>
 
 <!-- ============ ON THIS PAGE ============ -->
