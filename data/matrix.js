@@ -9,11 +9,11 @@ var D = {
   "note": "Baseline = the 63 cases shown in the keynote (Damiano, 2026-09-20). Merged 2026-09-22: 9 proposed additions and 1 proposed re-tag from the use cases added 2026-09-21 and a completeness sweep, all status \"provisional\" until Damiano confirms. See data/MATRIX-REFRESH.md. 2026-09-24 (Damiano): the two Eindhoven 'AI in the Hood' records merged into 2023-humankind-workshops (as in the ledger); 2025-seventh-hill-sessions (Ann Arbor) removed from the site; 2023-undp-kosovo-children-codesign kept after an evidence check."
  },
  "reach": {
-  "engagements": 106,
-  "cities": 77,
-  "countries": 39,
+  "engagements": 107,
+  "cities": 78,
+  "countries": 40,
   "since": 2021,
-  "note": "From the keynote client map as regenerated 21 Sept 2026 23:16 (WORKING/map/src totals.json, cities.json, countries.json: 107 · 79 · 39), with the site's corrections of 24 Sept 2026 (map-data/build_web_data.py SITE_REMOVED / SITE_MOVED): Ann Arbor removed (-1 engagement, -1 city); the merged 'AI in the Hood' workshop placed in Eindhoven, where it was held, not under the client's Amsterdam (-1 city). canon.yml still says 85 / 27."
+  "note": "From the keynote client map as regenerated 21 Sept 2026 23:16 (WORKING/map/src totals.json, cities.json, countries.json: 107 · 79 · 39), with the site's corrections of 24 Sept 2026 (map-data/build_web_data.py SITE_REMOVED / SITE_MOVED / SITE_ADDED): Ann Arbor removed (-1 engagement, -1 city); the merged 'AI in the Hood' workshop placed in Eindhoven, where it was held, not under the client's Amsterdam (-1 city). Added (SITE_ADDED): the KS workshop in Gjerdrum, Norway, 2026, on the framework but never on the keynote map (+1 engagement, +1 city, +1 country). canon.yml still says 85 / 27."
  },
  "axes": {
   "vertical": {
@@ -465,7 +465,7 @@ var D = {
    "slug": "2026-norway",
    "title": "Åmotsskogen, Norwegian Association of Local and Regional Authorities",
    "year": 2026,
-   "place": "Norway",
+   "place": "Gjerdrum, Norway",
    "task": "improve",
    "mandate": false,
    "image": null,
