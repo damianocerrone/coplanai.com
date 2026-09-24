@@ -416,8 +416,11 @@
     '2024-oman-planning-event':'Muscat, Oman',
     '2025-new-urban-habits-festival':'Bucharest, Romania'
   };
-  /* data/places.js (generated) still files the hidden Baku record, the online workshop and the Cairo
-     cohort under Manila. Drop and move them once, for every map, then recolour any city whose list changed. */
+  /* data/places.js (generated) still files the online workshop and the Cairo cohort under Manila. Drop and
+     move them once, for every map, then recolour any city whose list changed. Hidden records (duplicates,
+     merged or removed cases) are left out at build time since 24 Sept (map-data/build_web_data.py, which
+     also takes Ann Arbor off the map and puts the merged 'AI in the Hood' workshop in Eindhoven); the
+     hidden filter below stays as a safety net. */
   var OFF_MAP={'ai-based-visualisation-for-sustainable-and-affordable-housing':1};
   var MOVE_TO={'2026-giz':'Cairo'};
   var fixed=false;

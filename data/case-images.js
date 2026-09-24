@@ -5,7 +5,10 @@
          'city-map'      = drawn from OpenStreetMap data; the credit "Map data © OpenStreetMap contributors"
                            must be shown with the image (ODbL), e.g. in the caption or card footer.
    link: false = the source page names the retired company; show the credit, do not link source_url.
-   Existing images (img/cases, img/pool, the IMG table in use-cases.html) are untouched and win over these. */
+   Existing images (img/cases, img/pool, the IMG table in use-cases.html) are untouched and win over these.
+   24 Sept 2026: the entries for 2023-ai-in-the-hood-eindhoven (merged into 2023-humankind-workshops) and
+   2025-seventh-hill-sessions (Ann Arbor, removed from the site) are taken out, so their maps do not ship;
+   the files stay in img/cases-extra/. See data/CASE-IMAGES.md. */
 window.COPLAN_CASE_IMAGES = {
  "2024-oman-planning-event": {
   "file": "img/cases-extra/2024-oman-planning-event.jpg",
@@ -75,13 +78,6 @@ window.COPLAN_CASE_IMAGES = {
   "source_url": "https://coplanai.com/portfolio/milan/",
   "alt": "Participants of the campus walk at Città Studi, gathered on a path under trees.",
   "note": "our own photograph from the CoPlanAI portfolio folder (2026_POLIMI UNIMI/07_Outreach and Webpage/images/IMG_0399.jpeg); no partner photo found online"
- },
- "2023-ai-in-the-hood-eindhoven": {
-  "file": "img/cases-extra/2023-ai-in-the-hood-eindhoven.jpg",
-  "kind": "city-map",
-  "credit": "Map data © OpenStreetMap contributors",
-  "source_url": "https://www.openstreetmap.org/copyright",
-  "alt": "Map of central Eindhoven. The dot marks the Rochusbuurt, where the workshop took place."
  },
  "2023-humankind-workshops": {
   "file": "img/cases-extra/2023-humankind-workshops.jpg",
@@ -208,13 +204,6 @@ window.COPLAN_CASE_IMAGES = {
   "credit": "Map data © OpenStreetMap contributors",
   "source_url": "https://www.openstreetmap.org/copyright",
   "alt": "Map of central Malmö. The dot marks the Nyhamnen harbour area."
- },
- "2025-seventh-hill-sessions": {
-  "file": "img/cases-extra/2025-seventh-hill-sessions.jpg",
-  "kind": "city-map",
-  "credit": "Map data © OpenStreetMap contributors",
-  "source_url": "https://www.openstreetmap.org/copyright",
-  "alt": "Map of Ann Arbor. The dot marks Burns Park Elementary School, where families met."
  },
  "2023-undp-kosovo-children-codesign": {
   "file": "img/cases-extra/2023-undp-kosovo-children-codesign.jpg",

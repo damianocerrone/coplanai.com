@@ -282,7 +282,7 @@ a.uc-row:hover .uc-row__t{color:var(--amber)}
   <div class="uc-head__main">
     <p class="eyebrow">Use cases</p>
     <h1 class="display" id="h1">Where ideas have been <em>tried</em>.</h1>
-    <p class="lede">This catalogue holds <b data-m="total">71</b> of our <b data-m="reach.engagements">107</b> engagements. Each ran one of four tasks. The task depends on two things: how much was already decided, and whether people brought their own ideas or responded to material they were given. Where a case has its own page, its card opens it.</p>
+    <p class="lede">This catalogue holds <b data-m="total">69</b> of our <b data-m="reach.engagements">106</b> engagements. Each ran one of four tasks. The task depends on two things: how much was already decided, and whether people brought their own ideas or responded to material they were given. Where a case has its own page, its card opens it.</p>
     <div class="actions">
       <a class="link" href="#map">See the map</a>
     </div>
@@ -290,8 +290,8 @@ a.uc-row:hover .uc-row__t{color:var(--amber)}
   <div class="uc-figs">
     <p class="eyebrow" id="figs-h">Our work since <span data-m="reach.since">2021</span></p>
     <dl aria-labelledby="figs-h">
-      <div><dt class="lab">Engagements</dt><dd class="num num--s" data-m="reach.engagements">107</dd></div>
-      <div><dt class="lab">Cities</dt><dd class="num num--s" data-m="reach.cities">79</dd></div>
+      <div><dt class="lab">Engagements</dt><dd class="num num--s" data-m="reach.engagements">106</dd></div>
+      <div><dt class="lab">Cities</dt><dd class="num num--s" data-m="reach.cities">77</dd></div>
       <div><dt class="lab">Countries</dt><dd class="num num--s" data-m="reach.countries">39</dd></div>
     </dl>
   </div>
@@ -342,7 +342,7 @@ a.uc-row:hover .uc-row__t{color:var(--amber)}
       <!-- results: how to show them, then the cards -->
       <div class="uc-results">
         <div class="uc-bar">
-          <p class="uc-count" id="uc-count" aria-live="polite" aria-atomic="true">All <b data-m="total">71</b> engagements</p>
+          <p class="uc-count" id="uc-count" aria-live="polite" aria-atomic="true">All <b data-m="total">69</b> engagements</p>
           <div class="uc-bar__ctl" id="uc-ctl">
             <fieldset class="uc-seg">
               <legend class="sr">Order</legend>
@@ -390,7 +390,7 @@ a.uc-row:hover .uc-row__t{color:var(--amber)}
       <div class="uc-map-text">
         <p class="eyebrow">The map</p>
         <h2 class="h2" id="map-h">Where we have <em>worked</em>.</h2>
-        <p class="body">The map shows all <b data-m="reach.engagements">107</b> engagements, city by city. Each disc is sized by how often we have worked there and coloured by the task we ran there most.</p>
+        <p class="body">The map shows all <b data-m="reach.engagements">106</b> engagements, city by city. Each disc is sized by how often we have worked there and coloured by the task we ran there most.</p>
         <div class="legend uc-legend" id="uc-legend" role="group" aria-label="Map key"></div>
       </div>
       <figure class="uc-map-fig">
@@ -449,8 +449,8 @@ SITE.ready(function(){
      Sources: the live use-cases page (content/use-cases.md), the live case pages,
      reference/case-fact-pack.md, reference/FACT-AUDIT.md §7 and data/CASE-IMAGES.md. */
   var LINES={
-    '2023-ai-in-the-hood-eindhoven':'The closing session of Baltan Laboratories’ three-part community series, reimagining a green space in the Rochusbuurt with Humankind.',
-    '2023-humankind-workshops':'The closing workshop of the series in Eindhoven’s Rochusbuurt, held with Humankind.',
+    /* one case since 24 Sept (Damiano merged the two Eindhoven records; 2023-ai-in-the-hood-eindhoven is hidden) */
+    '2023-humankind-workshops':'The closing session of Baltan Laboratories’ three-part community series. With Humankind’s Good Public Space Analysis, residents reimagined a green space in the Rochusbuurt.',
     '2023-newcastle-city-of-longevity':'With the National Innovation Centre for Ageing: participatory methods for involving older adults in age-friendly urban design.',
     '2023-vantaa':'A two-day resident charrette pictured Havukoski in 2040: three narratives and scenario images that fed the district’s framework plan.',
     '2023-dinnomo-zurich':'A mobile web app for residents to photograph Zurich’s streets and reimagine them, each transformation placed on a public map.',
@@ -684,7 +684,9 @@ SITE.ready(function(){
   }
   function credit(c){ return (c.img&&c.img.credit)?'<span class="uc-credit'+(c.img.kind==='city-map'?' uc-credit--map':'')+'">'+esc(c.img.credit)+'</span>':''; }
   function foot(c,short){
-    return c.url?'<span class="uc-go">'+(short?'Case page':'Open the case page')+'<span class="sr"> (opens in a new tab)</span></span>':'<span class="uc-soon">No case page yet</span>';
+    /* a partner's own project page (TICO, Bologna: data/case-links.json "external") is not our case page */
+    var ext=c.url&&!/^https:\/\/coplanai\.com\//.test(c.url), k=ext?'project':'case';
+    return c.url?'<span class="uc-go">'+(short?(ext?'Project page':'Case page'):'Open the '+k+' page')+'<span class="sr"> (opens in a new tab)</span></span>':'<span class="uc-soon">No case page yet</span>';
   }
   function card(c){
     var inner=media(c)+

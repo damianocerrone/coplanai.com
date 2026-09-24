@@ -4,16 +4,16 @@
 (function(){
 var D = {
  "meta": {
-  "updated": "2026-09-22",
+  "updated": "2026-09-24",
   "source": "Portfolio OS ledger.json (2026-09-21) · mandate-table.json (Damiano, 2026-09-20) · Mandate Matrix kit",
-  "note": "Baseline = the 63 cases shown in the keynote (Damiano, 2026-09-20). Merged 2026-09-22: 9 proposed additions and 1 proposed re-tag from the use cases added 2026-09-21 and a completeness sweep, all status \"provisional\" until Damiano confirms. See data/MATRIX-REFRESH.md."
+  "note": "Baseline = the 63 cases shown in the keynote (Damiano, 2026-09-20). Merged 2026-09-22: 9 proposed additions and 1 proposed re-tag from the use cases added 2026-09-21 and a completeness sweep, all status \"provisional\" until Damiano confirms. See data/MATRIX-REFRESH.md. 2026-09-24 (Damiano): the two Eindhoven 'AI in the Hood' records merged into 2023-humankind-workshops (as in the ledger); 2025-seventh-hill-sessions (Ann Arbor) removed from the site; 2023-undp-kosovo-children-codesign kept after an evidence check."
  },
  "reach": {
-  "engagements": 107,
-  "cities": 79,
+  "engagements": 106,
+  "cities": 77,
   "countries": 39,
   "since": 2021,
-  "note": "From the keynote client map as regenerated 21 Sept 2026 23:16 (WORKING/map/src totals.json, cities.json, countries.json). canon.yml still says 85 / 27."
+  "note": "From the keynote client map as regenerated 21 Sept 2026 23:16 (WORKING/map/src totals.json, cities.json, countries.json: 107 · 79 · 39), with the site's corrections of 24 Sept 2026 (map-data/build_web_data.py SITE_REMOVED / SITE_MOVED): Ann Arbor removed (-1 engagement, -1 city); the merged 'AI in the Hood' workshop placed in Eindhoven, where it was held, not under the client's Amsterdam (-1 city). canon.yml still says 85 / 27."
  },
  "axes": {
   "vertical": {
@@ -145,7 +145,9 @@ var D = {
    "task": "imagine",
    "mandate": false,
    "image": null,
-   "status": "confirmed"
+   "status": "confirmed",
+   "hidden": true,
+   "hidden_note": "Merged into 2023-humankind-workshops (Damiano, 2026-09-24): one engagement, the closing workshop of Baltan Laboratories' AI in the Hood series in Eindhoven's Rochusbuurt, with Humankind. Same merge in the Portfolio OS ledger (journal 20260924-073717-merge-humankind-ai-in-the-hood); the survivor keeps its task (test) and title."
   },
   {
    "slug": "2023-newcastle-city-of-longevity",
@@ -593,11 +595,12 @@ var D = {
    "slug": "2023-humankind-workshops",
    "title": "'AI in the Hood' closing workshop, Humankind",
    "year": 2023,
-   "place": "Netherlands",
+   "place": "Eindhoven, Netherlands",
    "task": "test",
    "mandate": false,
    "image": null,
-   "status": "confirmed"
+   "status": "confirmed",
+   "note": "2026-09-24: absorbed 2023-ai-in-the-hood-eindhoven (Damiano merged the two records, as in the ledger). Title = the ledger's, without the retired name. Place from the ledger brief: Buurthuis de Buut, Rochusbuurt, Eindhoven."
   },
   {
    "slug": "2023-lulea-youth",
@@ -791,7 +794,9 @@ var D = {
    "mandate": true,
    "image": null,
    "status": "provisional",
-   "note": "Use case added 2026-09-21 · task 4/4 shape on each of the 4 use cases; mandate: Burns Park 4/4 yes, AAPS playground 3/4 yes, the two murals split (2 no, 1 yes, 1 unknown)"
+   "note": "Use case added 2026-09-21 · task 4/4 shape on each of the 4 use cases; mandate: Burns Park 4/4 yes, AAPS playground 3/4 yes, the two murals split (2 no, 1 yes, 1 unknown)",
+   "hidden": true,
+   "hidden_note": "Removed from the site by Damiano, 2026-09-24 (\"Ann Arbor remove\"). Kept here for provenance: never drawn, never counted, off the map."
   },
   {
    "slug": "2023-undp-kosovo-children-codesign",
@@ -802,7 +807,7 @@ var D = {
    "mandate": true,
    "image": null,
    "status": "provisional",
-   "note": "Use case added 2026-09-21 · task 4/4 shape; mandate 4/4 yes · needs Damiano"
+   "note": "Use case added 2026-09-21 · task 4/4 shape; mandate 4/4 yes · kept 2026-09-24 after an evidence check (photos of the session with the platform on screen, UNDP's own article photo from the same session, the sales record). Claim only that the AI testing workshops ran on the platform: UNDP credits SpaceSyntaks and Save the Children with facilitating the process. The children's photos stay unpublished until consent is confirmed."
   },
   {
    "slug": "2024-undp-panama-utp-intergenerational",
@@ -912,7 +917,8 @@ function get(obj,path){return path.split('.').reduce(function(o,k){return o==nul
 function bind(root){var s=stats(),ctx={s:s,reach:D.reach};
   (root||document).querySelectorAll('[data-m]').forEach(function(el){var k=el.getAttribute('data-m');var v=get(s,k);if(v==null)v=get(ctx,k);if(v!=null)el.textContent=v;});}
 
-/* "hidden": true marks a duplicate record kept for provenance: never drawn, never counted */
+/* "hidden": true marks a record kept for provenance only (a duplicate, a merged record or a case removed
+   from the site; the reason is in "hidden_note"): never drawn, never counted, never on the map */
 function visibleCases(){return D.cases.filter(function(c){return !c.hidden});}
 function byTask(key){return D.cases.filter(function(c){return c.task===key&&!c.hidden});}
 function bySlug(slug){for(var i=0;i<D.cases.length;i++)if(D.cases[i].slug===slug)return D.cases[i];return null;}

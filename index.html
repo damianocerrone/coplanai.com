@@ -372,6 +372,9 @@
 .cite .lab{display:block}
 .cite__t{display:block;margin-top:10px;font-family:var(--f-q);font-weight:var(--w-q);font-style:italic;font-size:clamp(20px,1.6vw,23px);line-height:1.28;color:var(--ink);text-wrap:balance}
 .cite__a{display:block;margin-top:10px;font-family:var(--f-name);font-weight:var(--w-name);font-size:16px;line-height:1.3;color:var(--ink-2)}
+.cite__t a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em;text-decoration-color:var(--rule)}
+.cite__t a:hover{color:var(--amber);text-decoration-color:var(--amber)}
+.cite__s{display:block;margin-top:4px;font-size:calc(var(--fs-text) - 2.5px);line-height:1.45;color:var(--ink-3)}
 .people{grid-column:5/9;display:grid;gap:26px;align-content:start}
 .person .name{font-size:24px}
 .person .lab{margin-top:6px;color:var(--amber)}
@@ -510,7 +513,7 @@ a.signal:hover .signal__title .arr{color:var(--amber);transform:translate(2px,-2
             <a class="btn" href="use-cases.html">See the use cases</a>
             <a class="link" href="#framework">Read the framework</a>
           </div>
-          <p class="stats"><span><b data-m="reach.engagements">107</b> engagements</span><span><b data-m="reach.cities">79</b> cities</span><span><b data-m="reach.countries">39</b> countries</span></p>
+          <p class="stats"><span><b data-m="reach.engagements">106</b> engagements</span><span><b data-m="reach.cities">77</b> cities</span><span><b data-m="reach.countries">39</b> countries</span></p>
           <p class="hv__cue lab" aria-hidden="true"><i></i>Scroll, and the diagram opens</p>
         </div>
 
@@ -720,7 +723,7 @@ a.signal:hover .signal__title .arr{color:var(--amber);transform:translate(2px,-2
           <p class="fw-no"><span class="n">00</span><span class="lab">Before the build</span></p>
           <h3 class="h3" id="s0h">Two questions place every engagement.</h3>
           <p class="body">Any engagement that asks a public something can be placed with them: a workshop, a museum kiosk, a festival vote, a truck touring the neighbourhoods.</p>
-          <p class="body">The figure is built from our own work: each disc is one of the <span data-m="total">71</span> engagements in which people were asked. Talks, trainings and research grants are left off.</p>
+          <p class="body">The figure is built from our own work: each disc is one of the <span data-m="total">69</span> engagements in which people were asked. Talks, trainings and research grants are left off.</p>
         </article>
 
         <article class="fw-step" id="step-1" data-step="1" aria-labelledby="s1h">
@@ -786,7 +789,7 @@ a.signal:hover .signal__title .arr{color:var(--amber);transform:translate(2px,-2
           <p class="body">Helsinki Summer Streets, 2023, sits here. So do Kaarina’s market square, above, and Jyväskylä, where culture and real-estate actors imagined new uses for the interiors of the main library.</p>
           <ul class="feat" data-feat="shape" aria-label="Co-design: four of the engagements"></ul>
           <div class="fw-close">
-            <p class="body">That is the whole framework: <span data-m="total">71</span> engagements, four tasks, two questions. The use cases page holds every one of them, with a filter for each task.</p>
+            <p class="body">That is the whole framework: <span data-m="total">69</span> engagements, four tasks, two questions. The use cases page holds every one of them, with a filter for each task.</p>
             <div class="actions">
               <a class="btn" href="use-cases.html">See the use cases</a>
             </div>
@@ -962,8 +965,9 @@ a.signal:hover .signal__title .arr{color:var(--amber);transform:translate(2px,-2
 </section>
 
 <!-- =====================================================================
-     8 · WHERE THE METHOD COMES FROM (R1.10: Sampo Ruoppila's paper, author and
-     title only; no venue, year or link is known)
+     8 · WHERE THE METHOD COMES FROM (R1.10: Sampo Ruoppila's paper. Published 16 Sept 2026, open
+     access: Ruoppila, S. and Anastasiou, K. (2026) Urban Research & Practice, 1–27,
+     doi:10.1080/17535069.2026.2730986; compact here, the full reference is on Mission)
      ===================================================================== -->
 <section class="section section--flush-top" id="research" aria-labelledby="research-h">
   <div class="wrap">
@@ -974,8 +978,9 @@ a.signal:hover .signal__title .arr{color:var(--amber);transform:translate(2px,-2
         <p class="body">It sits in the Scandinavian participatory-design tradition, in which tacit skill is shared by exercising it rather than by describing it. Our research reads our own engagements against the literature on planning, participation and generative AI.</p>
         <p class="cite">
           <span class="lab">Further reading</span>
-          <cite class="cite__t">Participating with AI: how generative visualisations are changing participatory planning</cite>
-          <span class="cite__a">Sampo Ruoppila</span>
+          <cite class="cite__t"><a href="https://doi.org/10.1080/17535069.2026.2730986" target="_blank" rel="noopener">Participating with AI: how generative visualisations are changing participatory planning<span class="sr"> (opens in a new tab)</span></a></cite>
+          <span class="cite__a">Sampo Ruoppila and Konsta Anastasiou</span>
+          <span class="cite__s"><i>Urban Research &amp; Practice</i>, 2026 · open access</span>
         </p>
         <div class="actions">
           <a class="link link--arrow" href="mission.html">Read the mission</a>
