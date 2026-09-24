@@ -138,6 +138,15 @@ window.COPLAN_LOGOS = [
   "ratio": 5.46
  },
  {
+  "name": "Gjerdrum kommune",
+  "slug": "gjerdrum",
+  "file": null,
+  "kind": "client",
+  "country": "Norway",
+  "ratio": null,
+  "note": "Co-client of the Åmotsskogen engagement with KS Forskning, each paying half (Damiano, 24 Sept 2026: an engagement can have several clients, each with its logo). Text-only until the municipal arms are added."
+ },
+ {
   "name": "Republic of Estonia — Ministry of Climate",
   "slug": "estonia-ministry-of-climate",
   "file": "img/logos/estonia-ministry-of-climate.svg",
